@@ -62,16 +62,16 @@ public class FrontController {
         request.setAttribute("role", user, WebRequest.SCOPE_SESSION);
     }
 
-    @PostMapping("/AddToWishList")
-    public String AddToWishList(WebRequest request) throws LoginSampleException {
+    @PostMapping("/create_project")
+    public String create_project(WebRequest request) throws LoginSampleException {
         String name = request.getParameter("name");
 
-
+        return "create_project";
     }
 
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
-        model.addAttribute("message",exception.getMessage());
+        model.addAttribute("message", exception.getMessage());
         return "exceptionPage";
     }
 }
