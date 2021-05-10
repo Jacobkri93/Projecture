@@ -22,8 +22,6 @@ public class FrontController {
         return "index";
     }
 
-
-
     @PostMapping("/login")
     public String loginUser(WebRequest request) throws LoginSampleException {
         //Retrieve values from HTML form via WebRequest
@@ -35,7 +33,7 @@ public class FrontController {
         setSessionInfo(request, user);
 
         // Go to to page dependent on role
-        return "userpages/";
+        return "home";
     }
 
     @PostMapping("/register")
@@ -50,8 +48,8 @@ public class FrontController {
             User user = loginController.createUser(email, password1);
             setSessionInfo(request, user);
 
-            // Go to page dependent on role
-            return "userpages/";
+            //
+            return "home";
 
         } else { // If passwords don't match, an exception is thrown
             throw new LoginSampleException("The two passwords did not match");
@@ -62,6 +60,13 @@ public class FrontController {
         // Place user info on session
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("role", user, WebRequest.SCOPE_SESSION);
+    }
+
+    @PostMapping("/AddToWishList")
+    public String AddToWishList(WebRequest request) throws LoginSampleException {
+        String name = request.getParameter("name");
+
+
     }
 
     @ExceptionHandler(Exception.class)

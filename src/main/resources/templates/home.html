@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>This is home! 🏠</h1>
+
+<p th:text="${session.user.email}" th:unless="${session == null}">[...]</p>
+<p th:text="${session.user.password}" th:unless="${session == null}">[...]</p>
+
+<hr style="border-color: Black">
+
+<div>
+    <form action="create_project" metod="POST">
+        <label for="name">Name of item:</label>
+        <input type="text" id="name" name="name" required placeholder="Write project name here">
+        <button type="submit"> Start Project</button>
+    </form>
+</div>
+
+<table class="table">
+    <thead class="thead">
+    <tr>
+        <th>Name:</th>
+        <th>Description:</th>
+        <th>Price:</th>
+        <th>Reserve:</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project_name : ${session.items}">
+        <td th:text="${item.name}"></td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
