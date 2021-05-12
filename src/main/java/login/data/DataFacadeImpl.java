@@ -6,8 +6,8 @@ import login.domain.Project;
 import login.domain.User;
 
 public class DataFacadeImpl implements DataFacade {
-    private UserMapper userMapper = new UserMapper();
-    private ProjectMapper projectMapper = new ProjectMapper();
+   private UserMapper userMapper = new UserMapper();
+   private ProjectMapper projectMapper = new ProjectMapper();
 
     public User login(String email, String password) throws LoginSampleException {
         return userMapper.login(email, password);
@@ -19,8 +19,18 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     @Override
-    public Project create_project(Project project) {
-        projectMapper.create_project(project);
+    public Project createProject(Project project) {
+        projectMapper.createProject(project);
         return project;
     }
-}
+
+    @Override
+    public Project getProject(int project_id, String project_name, int week_duration) {
+        return null;
+    }
+
+
+
+    }
+
+

@@ -26,14 +26,14 @@ public class UserMapper {
     public User login(String email, String password) throws LoginSampleException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT id FROM User "
+            String SQL = "SELECT user_id FROM User "
                     + "WHERE email=? AND password=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("user_id");
                 User user = new User(email, password);
                 user.setId(id);
                 return user;

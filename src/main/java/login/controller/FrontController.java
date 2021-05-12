@@ -1,9 +1,7 @@
 package login.controller;
 
 import login.data.DataFacadeImpl;
-import login.domain.LoginController;
-import login.domain.LoginSampleException;
-import login.domain.User;
+import login.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,6 +14,7 @@ public class FrontController {
 
     //use case controller (GRASP Controller) - injects concrete facade instance into controller
     private LoginController loginController = new LoginController(new DataFacadeImpl());
+    private ProjectController projectController = new ProjectController(new DataFacadeImpl());
 
     @GetMapping("/")
     public String getHome() {
@@ -61,17 +60,24 @@ public class FrontController {
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("role", user, WebRequest.SCOPE_SESSION);
     }
+    private void setSessionInfoForProject(WebRequest request, Project project) {
+        // Place user info on session
+        request.setAttribute("name", project, WebRequest.SCOPE_SESSION);
 
-    @PostMapping("/create_project")
-    public String create_project(WebRequest request) throws LoginSampleException {
-        String name = request.getParameter("name");
+    }
 
-        return "create_project";
+    @PostMapping(value ="/makeproject")
+    public String createProject(WebRequest request)  {
+        String project_name = request.getParameter("name");
+        Project project = projectController.createProject(project_name);
+        setSessionInfoForProject(request,project);
+
+return "home";
     }
 
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
-        model.addAttribute("message", exception.getMessage());
+        model.addAttribute("message",exception.getMessage());
         return "exceptionPage";
     }
 }

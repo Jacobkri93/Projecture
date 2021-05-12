@@ -13,7 +13,7 @@
 <hr style="border-color: Black">
 
 <div>
-    <form action="create_project" metod="POST">
+    <form th:action="@{/makeproject}" method="POST">
         <label for="name">Name of item:</label>
         <input type="text" id="name" name="name" required placeholder="Write project name here">
         <button type="submit"> Start Project</button>

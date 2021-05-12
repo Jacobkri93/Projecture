@@ -1,32 +1,32 @@
 package login.data;
 
-import login.domain.*;
+import login.domain.Project;
+import login.domain.User;
 
 import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ProjectMapper {
 
-    public Project create_project(User user, Project week_duration) {
+    public void createProject(Project project) {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO project (user_id, week_duration) VALUES (?,?)";
+            String SQL = "INSERT INTO project (project_name,week_duration) VALUES (?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, user.getId());
-            ps.setInt(2, week_duration.getWeek_duration());
-
-            ps.executeUpdate();
+           // ps.setInt(1, project.getProject_id());
+            ps.setString(1, project.getProject_name());
+            ps.setInt(2, project.getWeek_duration());
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
+            ps.executeUpdate();
             int id = ids.getInt(1);
-            user.setId(id);
+            project.setProject_id(id);
 
         } catch (SQLException ex) {
 
         }
-        return Project(user);
+
+
     }
-
-
-
 }
