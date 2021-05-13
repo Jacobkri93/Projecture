@@ -16,7 +16,7 @@ public class ProjectMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
            // ps.setInt(1, project.getProject_id());
             ps.setString(1, project.getProject_name());
-            ps.setInt(2, project.getWeek_duration());
+            ps.setString(2, project.getWeek_duration());
             ps.setInt(3, user.getId());
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();

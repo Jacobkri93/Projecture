@@ -64,6 +64,7 @@ public class FrontController {
     private void setSessionInfoForProject(WebRequest request, Project project, User user) {
         // Place user info on session
         request.setAttribute("name", project.getProject_name(), WebRequest.SCOPE_SESSION);
+        request.setAttribute("week_duration", project.getWeek_duration(), WebRequest.SCOPE_SESSION);
         //Før var det project - nu project.getProject_name()
 
     }
@@ -71,9 +72,10 @@ public class FrontController {
     @PostMapping(value = "/makeproject")
     public String createProject(WebRequest request) {
         String project_name = request.getParameter("name");
+        String week_duration = request.getParameter("week_duration");
       //  Project project = projectController.createProject(project_name, user);
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        Project list = projectController.createProject(project_name, user);
+        Project list = projectController.createProject(project_name, week_duration, user);
         setSessionInfoForProject(request, list,user);
 
 return "createProject";

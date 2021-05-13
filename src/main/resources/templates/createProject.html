@@ -7,5 +7,6 @@
 <body>
 <h1>Project Creation page</h1>
 <p th:text="${session.name}" th:unless="${session == null}">[...]</p>
+<p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
 </body>
 </html>

@@ -16,6 +16,9 @@
     <form th:action="@{/makeproject}" method="POST">
         <label for="name">Name of item:</label>
         <input type="text" id="name" name="name" required placeholder="Write project name here">
+        <label for="name">week duration:</label>
+        <input type="number" id="week" name="week_duration" required placeholder=" ex. 7 weeks">
+
         <button type="submit"> Start Project</button>
     </form>
 </div>
