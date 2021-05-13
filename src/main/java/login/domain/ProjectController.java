@@ -9,9 +9,9 @@ public class ProjectController {
     }
 
 
-    public Project createProject(String project_name) {
+    public Project createProject(String project_name, User user) {
         Project project = new Project(project_name);
-        facade.createProject(project);
+        facade.createProject(project, user );
         return project;
     }
 }

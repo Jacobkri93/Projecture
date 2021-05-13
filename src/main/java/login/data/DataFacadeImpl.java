@@ -9,6 +9,7 @@ public class DataFacadeImpl implements DataFacade {
    private UserMapper userMapper = new UserMapper();
    private ProjectMapper projectMapper = new ProjectMapper();
 
+
     public User login(String email, String password) throws LoginSampleException {
         return userMapper.login(email, password);
     }
@@ -18,9 +19,12 @@ public class DataFacadeImpl implements DataFacade {
         return user;
     }
 
+
+
+
     @Override
-    public Project createProject(Project project) {
-        projectMapper.createProject(project);
+    public Project createProject(Project project, User user) {
+        projectMapper.createProject(project, user);
         return project;
     }
 

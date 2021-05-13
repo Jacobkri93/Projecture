@@ -60,25 +60,28 @@ public class FrontController {
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("role", user, WebRequest.SCOPE_SESSION);
     }
-    private void setSessionInfoForProject(WebRequest request, Project project) {
+
+    private void setSessionInfoForProject(WebRequest request, Project project, User user) {
         // Place user info on session
         request.setAttribute("name", project.getProject_name(), WebRequest.SCOPE_SESSION);
         //Før var det project - nu project.getProject_name()
 
     }
 //vi pegede på et object og forventede en string.
-    @PostMapping(value ="/makeproject")
-    public String createProject(WebRequest request)  {
+    @PostMapping(value = "/makeproject")
+    public String createProject(WebRequest request) {
         String project_name = request.getParameter("name");
-        Project project = projectController.createProject(project_name);
-        setSessionInfoForProject(request,project);
+      //  Project project = projectController.createProject(project_name, user);
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        Project list = projectController.createProject(project_name, user);
+        setSessionInfoForProject(request, list,user);
 
 return "createProject";
     }
 
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
-        model.addAttribute("message",exception.getMessage());
+        model.addAttribute("message", exception.getMessage());
         return "exceptionPage";
     }
 }
