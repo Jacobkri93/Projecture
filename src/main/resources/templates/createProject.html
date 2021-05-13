@@ -8,5 +8,22 @@
 <h1>Project Creation page</h1>
 <p th:text="${session.name}" th:unless="${session == null}">[...]</p>
 <p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
+<div>
+    <form>
+        <label for="sub_name">Subtask name:</label>
+        <input type="text" id="sub_name" name="sub_name" size="20">
+        <br>
+        <label for="sub_hours">Duration in weeks:</label>
+        <input type="number" id="sub_hours" name="sub_hours" onkeydown="return false" min="1" max="99">
+        <br>
+        <label for="sub_emp">Responsible for this task :</label>
+        <select name="sub_emp" id="sub_emp">
+            <option value="Developer">Developer</option>
+            <option value="Senior Developer">Senior Developer</option>
+        </select>
+    </form>
+    Estimated cost of this task:
+
+</div>
 </body>
 </html>
