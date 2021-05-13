@@ -1,13 +1,11 @@
 package login.data;
 
-import login.domain.DataFacade;
-import login.domain.LoginSampleException;
-import login.domain.Project;
-import login.domain.User;
+import login.domain.*;
 
 public class DataFacadeImpl implements DataFacade {
    private UserMapper userMapper = new UserMapper();
    private ProjectMapper projectMapper = new ProjectMapper();
+   private SubtaskMapper subtaskMapper = new SubtaskMapper();
 
 
     public User login(String email, String password) throws LoginSampleException {
@@ -19,6 +17,16 @@ public class DataFacadeImpl implements DataFacade {
         return user;
     }
 
+    @Override
+    public Subtask createSubtask(Subtask subtask, Project project) {
+        subtaskMapper.createSubtask(subtask,project);
+        return subtask;
+    }
+
+    @Override
+    public Project getSubtask(String subtask_name, int hours, double cost, String employees) {
+        return null;
+    }
 
 
 
@@ -33,6 +41,6 @@ public class DataFacadeImpl implements DataFacade {
         return null;
     }
 
-    }
+}
 
 

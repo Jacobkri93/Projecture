@@ -1,18 +1,23 @@
 package login.domain;
 
+import java.util.ArrayList;
+
 public class Project {
     private int project_id;
     private String project_name;
-    private String week_duration;
+    private int week_duration;
+   // måske?? private ArrayList<subtask> subtasks;
 
 
-    public Project(String project_name, String week_duration) {
+    public Project(String project_name, int week_duration) {
         this.project_name = project_name;
         this.week_duration = week_duration;
     }
 
-
-
+//Måske
+//  //  public ArrayList<subtask> getSubtasks() {
+//        return subtasks;
+//    }
 
     public String getProject_name() {
         return project_name;
@@ -22,11 +27,11 @@ public class Project {
         this.project_name = project_name;
     }
 
-    public String getWeek_duration() {
+    public int getWeek_duration() {
         return week_duration;
     }
 
-    public void setWeek_duration(String week_duration) {
+    public void setWeek_duration(int week_duration) {
         this.week_duration = week_duration;
     }
 
