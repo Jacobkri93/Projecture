@@ -15,7 +15,7 @@ public class FrontController {
     //use case controller (GRASP Controller) - injects concrete facade instance into controller
     private LoginController loginController = new LoginController(new DataFacadeImpl());
     private ProjectController projectController = new ProjectController(new DataFacadeImpl());
-
+//Getmapping når vi skal have noget fra serveren. Betyder også html siderne.
     @GetMapping("/")
     public String getHome() {
         return "index";
@@ -34,7 +34,7 @@ public class FrontController {
         // Go to to page dependent on role
         return "home";
     }
-
+//postmapping når vi skal give noget til serveren.
     @PostMapping("/register")
     public String createUser(WebRequest request) throws LoginSampleException {
         //Retrieve values from HTML form via WebRequest
@@ -62,17 +62,18 @@ public class FrontController {
     }
     private void setSessionInfoForProject(WebRequest request, Project project) {
         // Place user info on session
-        request.setAttribute("name", project, WebRequest.SCOPE_SESSION);
+        request.setAttribute("name", project.getProject_name(), WebRequest.SCOPE_SESSION);
+        //Før var det project - nu project.getProject_name()
 
     }
-
+//vi pegede på et object og forventede en string.
     @PostMapping(value ="/makeproject")
     public String createProject(WebRequest request)  {
         String project_name = request.getParameter("name");
         Project project = projectController.createProject(project_name);
         setSessionInfoForProject(request,project);
 
-return "home";
+return "createProject";
     }
 
     @ExceptionHandler(Exception.class)
