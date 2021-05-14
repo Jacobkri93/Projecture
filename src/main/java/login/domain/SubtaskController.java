@@ -11,7 +11,7 @@ public class SubtaskController {
 
     public Subtask createSubtask(String task_name, int hours, double cost, String employees, Project project) {
         Subtask subtask = new Subtask(task_name, hours, cost, employees);
-        facade.createSubtask(subtask, project);
+        facade.createSubtask(subtask);
         return subtask;
     }
     public Subtask getSubtask(String task_name, int hours, double cost, String employees){

@@ -18,13 +18,13 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     @Override
-    public Subtask createSubtask(Subtask subtask, Project project) {
-        subtaskMapper.createSubtask(subtask,project);
+    public Subtask createSubtask(Subtask subtask) {
+        subtaskMapper.createSubtask(subtask);
         return subtask;
     }
 
     @Override
-    public Subtask getSubtask(String subtask_name, int hours, double cost, String employees) {
+    public  Subtask getSubtask(String subtask_name, int hours, double cost, String employees) {
        return subtaskMapper.getSubtask(subtask_name);
     }
 

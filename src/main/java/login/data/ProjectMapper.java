@@ -39,7 +39,7 @@ public class ProjectMapper {
         ArrayList<Subtask> subtasklist = new ArrayList<Subtask>();
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT subtask.* FROM project join subtask ON subtask.id=project.subtask_id WHERE project.user_id=?)";
+            String SQL = "SELECT subtasks.* FROM project join subtasks ON subtasks.subtask_id=project.subtask_id WHERE project.user_id=?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, user.getId());
 

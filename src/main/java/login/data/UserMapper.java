@@ -9,7 +9,7 @@ public class UserMapper {
     public void createUser(User user) throws LoginSampleException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO User (email, password) VALUES (?, ?)";
+            String SQL = "INSERT INTO user (email, password) VALUES (?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getPassword());
@@ -26,7 +26,7 @@ public class UserMapper {
     public User login(String email, String password) throws LoginSampleException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT user_id FROM User "
+            String SQL = "SELECT user_id FROM user "
                     + "WHERE email=? AND password=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);

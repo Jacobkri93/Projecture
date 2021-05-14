@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`project`
     CONSTRAINT `project_ibfk_1`
         FOREIGN KEY (`user_id`)
             REFERENCES `user_admin`.`user` (`user_id`)
+
 )
     ENGINE = InnoDB
     AUTO_INCREMENT = 8

@@ -9,9 +9,13 @@ public class Project {
     private ArrayList<Subtask> subtasklist;
     private int user_id;
 
+    public Project(String project_name, int week_duration) {
+    }
+
     public Project() {
 
     }
+
 
     public int getUser_id() {
         return user_id;
@@ -34,10 +38,8 @@ public class Project {
 
 
 
-    public Project(String project_name, int week_duration) {
-        this.project_name = project_name;
-        this.week_duration = week_duration;
-    }
+
+
 
 
     public String getProject_name() {

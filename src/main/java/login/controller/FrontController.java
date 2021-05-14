@@ -17,6 +17,7 @@ public class FrontController {
     private ProjectController projectController = new ProjectController(new DataFacadeImpl());
     private SubtaskController subtaskController = new SubtaskController(new DataFacadeImpl());
 
+
     //Getmapping når vi skal have noget fra serveren. Betyder også html siderne.
     @GetMapping("/")
     public String getHome() {
@@ -89,19 +90,28 @@ public class FrontController {
     }
 
 
-    private void setSessionInfoForSubtask(WebRequest request, Subtask subtask, Project project) {
+//    private void setSessionInfoForSubtask(WebRequest request, Subtask subtask, Project project) {
+//
+//        request.setAttribute("task_name", subtask.getTask_name(), WebRequest.SCOPE_SESSION);
+//        request.setAttribute("hours", subtask.getHours(), WebRequest.SCOPE_SESSION);
+//        request.setAttribute("cost", subtask.getCost(), WebRequest.SCOPE_SESSION);
+//        request.setAttribute("employees", subtask.getEmployees(), WebRequest.SCOPE_SESSION);
+//    }
 
-        request.setAttribute("task_name", subtask.getTask_name(), WebRequest.SCOPE_SESSION);
-        request.setAttribute("hours", subtask.getHours(), WebRequest.SCOPE_SESSION);
-        request.setAttribute("cost", subtask.getCost(), WebRequest.SCOPE_SESSION);
-        request.setAttribute("employees", subtask.getEmployees(), WebRequest.SCOPE_SESSION);
+    private void setSessionInfoForSubtask(WebRequest request, User user, Project list) {
+
+        request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
+        request.setAttribute("project",  list.getProject_name(), WebRequest.SCOPE_SESSION);
+        request.setAttribute("subtasks", list.getSubtasklist(), WebRequest.SCOPE_SESSION);
+
     }
 
     @PostMapping(value = "/makesubtask")
     public String createSubtask(WebRequest request)  {
         String task_name = request.getParameter("task_name");
         Integer hours = Integer.valueOf(request.getParameter("hours"));
-        Double cost = Double.valueOf(request.getParameter("cost"));
+        //Double cost = Double.valueOf(request.getParameter("cost"));
+        Double cost = 0.0;
         String employees = request.getParameter("employees");
 
 
@@ -111,7 +121,7 @@ public class FrontController {
         }
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project list = projectController.addToProject(user,subtask);
-        setSessionInfoForSubtask(request,subtask,list);
+        setSessionInfoForSubtask(request,user,list);
 
         return "createProject";
     }
