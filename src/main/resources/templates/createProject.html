@@ -9,7 +9,7 @@
 <p th:text="${session.name}" th:unless="${session == null}">[...]</p>
 <p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
 <div>
-    <form>
+    <form th:action="@{/makesubtask}" method="POST">
         <label for="sub_name">Subtask name:</label>
         <input type="text" id="sub_name" name="task_name" size="20">
         <br>
@@ -17,11 +17,14 @@
         <input type="number" id="sub_hours" name="hours" onkeydown="return false" min="1" max="99">
         <br>
         <label for="sub_emp">Responsible for this task :</label>
-        <select name="sub_emp" id="sub_emp">
+        <select name="employees" id="sub_emp">
             <option value="Developer">Developer</option>
             <option value="Senior Developer">Senior Developer</option>
         </select>
+        <button type="submit"> add subtask</button>
     </form>
+
+
     Estimated cost of this task:
     <table class="table">
         <thead class="thead">
@@ -34,8 +37,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="project_name : ${session.items}">
-            <td th:text="${item.name}"></td>
+        <tr th:each="project_name : ${session.subtasks}">
+            <td th:text="${subtask.task_name}"></td>
 
         </tr>
         </tbody>

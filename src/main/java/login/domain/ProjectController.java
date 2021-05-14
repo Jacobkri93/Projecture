@@ -14,4 +14,12 @@ public class ProjectController {
         facade.createProject(project, user );
         return project;
     }
+
+    public Project getProject(User user) {
+        return this.facade.getProject(user);
+    }
+
+    public Project addToProject(User user, Subtask subtask) {
+        return this.facade.addToList(user,subtask);
+    }
 }

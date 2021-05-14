@@ -31,6 +31,7 @@ public class FrontController {
 
         // delegate work + data to login controller
         User user = loginController.login(email, pwd);
+        Project list = projectController.getProject(user);
         setSessionInfo(request, user);
 
         // Go to to page dependent on role
@@ -97,14 +98,20 @@ public class FrontController {
     }
 
     @PostMapping(value = "/makesubtask")
-    public String createSubtask(WebRequest request) throws NumberFormatException {
+    public String createSubtask(WebRequest request)  {
         String task_name = request.getParameter("task_name");
         Integer hours = Integer.valueOf(request.getParameter("hours"));
         Double cost = Double.valueOf(request.getParameter("cost"));
         String employees = request.getParameter("employees");
-        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-        Subtask SC = subtaskController.createSubtask(task_name, hours, cost, employees, project);
-        setSessionInfoForSubtask(request, SC, project);
+
+
+        Subtask subtask = subtaskController.getSubtask(task_name,hours,cost,employees);
+        if (subtask == null) {
+            subtask = subtaskController.createSubtask(new Subtask(task_name,hours,cost,employees));
+        }
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        Project list = projectController.addToProject(user,subtask);
+        setSessionInfoForSubtask(request,subtask,list);
 
         return "createProject";
     }

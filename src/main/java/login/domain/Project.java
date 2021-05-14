@@ -6,7 +6,32 @@ public class Project {
     private int project_id;
     private String project_name;
     private int week_duration;
-   // måske?? private ArrayList<subtask> subtasks;
+    private ArrayList<Subtask> subtasklist;
+    private int user_id;
+
+    public Project() {
+
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+
+
+    public ArrayList<Subtask> getSubtasklist() {
+        return subtasklist;
+    }
+
+    public void setSubtasklist(ArrayList<Subtask> subtasklist) {
+        this.subtasklist = subtasklist;
+    }
+
+
 
 
     public Project(String project_name, int week_duration) {
@@ -14,10 +39,6 @@ public class Project {
         this.week_duration = week_duration;
     }
 
-//Måske
-//  //  public ArrayList<subtask> getSubtasks() {
-//        return subtasks;
-//    }
 
     public String getProject_name() {
         return project_name;

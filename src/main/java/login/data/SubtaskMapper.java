@@ -3,6 +3,7 @@ package login.data;
 import login.domain.Subtask;
 import login.domain.Project;
 
+import java.io.FileNotFoundException;
 import java.sql.*;
 
 public class SubtaskMapper {
@@ -29,5 +30,30 @@ public class SubtaskMapper {
 
         }
 
+
+
+
     }
+
+public Subtask getSubtask (String task_name) {
+    try {
+        Connection con = DBManager.getConnection();
+        String SQL = "SELECT id, task_name, hours, cost,employees FROM subtask where task_name = ?;";
+        PreparedStatement ps = con.prepareStatement(SQL);
+        ps.setString(1, task_name);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            int hours = rs.getInt("hours");
+            int id = rs.getInt("id");
+            double cost = rs.getDouble("cost");
+            String employees = rs.getString("employees");
+            Subtask subtask = new Subtask(task_name, hours, cost, employees);
+            subtask.setId(id);
+            return subtask;
+        }
+    } catch (SQLException ex) {
+    }
+    return null;
+
+}
 }

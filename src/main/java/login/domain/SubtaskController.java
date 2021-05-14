@@ -14,4 +14,12 @@ public class SubtaskController {
         facade.createSubtask(subtask, project);
         return subtask;
     }
+    public Subtask getSubtask(String task_name, int hours, double cost, String employees){
+        return this.facade.getSubtask(task_name,hours,cost,employees);
+    }
+
+
+    public Subtask createSubtask(Subtask subtask) {
+        return subtask;
+    }
 }

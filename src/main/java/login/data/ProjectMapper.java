@@ -1,6 +1,7 @@
 package login.data;
 
 import login.domain.Project;
+import login.domain.Subtask;
 import login.domain.User;
 
 import java.io.FileNotFoundException;
@@ -14,7 +15,7 @@ public class ProjectMapper {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO project (project_name,week_duration, user_id) VALUES (?,?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-           // ps.setInt(1, project.getProject_id());
+            // ps.setInt(1, project.getProject_id());
             ps.setString(1, project.getProject_name());
             ps.setInt(2, project.getWeek_duration());
             ps.setInt(3, user.getId());
@@ -31,33 +32,49 @@ public class ProjectMapper {
 
 
     }
-    //måske ??
+    //måske
 
-//    public Project get(User user) {
-//        Wishlist list = new Wishlist();
-//        ArrayList<Item> itemlist = new ArrayList<Item>();
-//        try {
-//            Connection con = DBManager.getConnection();
-//            String SQL = "SELECT item.* FROM wishlist join item ON item.id=wishlist.item_id WHERE wishlist.user_id=?";
-//            PreparedStatement ps = con.prepareStatement(SQL);
-//            ps.setInt(1, user.getId());
-//
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                String description = rs.getString("description");
-//                String name = rs.getString("name");
-//                int id = rs.getInt("id");
-//                double price = rs.getDouble("price");
-//                Item item = new Item(name, description, price);
-//                item.setId(id);
-//                itemlist.add(item);
-//            }
-//        } catch (SQLException | FileNotFoundException ex) {
-//        }
-//        list.setItemlist(itemlist);
-//        list.setUser_id(user.getId());
-//        return list;
-//
+    public Project getProject(User user) {
+        Project list = new Project();
+        ArrayList<Subtask> subtasklist = new ArrayList<Subtask>();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT subtask.* FROM project join subtask ON subtask.id=project.subtask_id WHERE project.user_id=?)";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, user.getId());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String task_name = rs.getString("task_name");
+                int hours = rs.getInt("hours");
+                double cost = rs.getDouble("cost");
+                String employees = rs.getString("employess");
+                int id = rs.getInt("id");
+                Subtask subtask = new Subtask(task_name, hours, cost, employees);
+                subtask.setId(id);
+                subtasklist.add(subtask);
+            }
+        } catch (SQLException ex) {
+        }
+        list.setSubtasklist(subtasklist);
+        list.setUser_id(user.getId());
+        return list;
 
 
+    }
+
+    public Project addSubtaskToProject(User user, Subtask subtask) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO project (user_id, subtask_id) VALUES (?,?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, user.getId());
+            ps.setInt(2, subtask.getId());
+
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+        }
+        return getProject(user);
+    }
 }

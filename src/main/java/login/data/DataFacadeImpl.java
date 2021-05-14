@@ -24,10 +24,19 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     @Override
-    public Project getSubtask(String subtask_name, int hours, double cost, String employees) {
-        return null;
+    public Subtask getSubtask(String subtask_name, int hours, double cost, String employees) {
+       return subtaskMapper.getSubtask(subtask_name);
     }
 
+    @Override
+    public Project addToList(User user, Subtask subtask) {
+       return projectMapper.addSubtaskToProject(user, subtask);
+    }
+
+    @Override
+    public Project getProject(User user) {
+        return projectMapper.getProject(user);
+    }
 
 
     @Override
@@ -36,10 +45,7 @@ public class DataFacadeImpl implements DataFacade {
         return project;
     }
 
-    @Override
-    public Project getProject(int project_id, String project_name, int week_duration) {
-        return null;
-    }
+
 
 }
 
