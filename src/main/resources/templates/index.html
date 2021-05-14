@@ -2,41 +2,170 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Landing page</title>
+    <title>Projecture</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-Welcome to MyApp!
 
-<table>
-    <tr><td>Login</td>
-        <td>
-            <form name="login" action="/login" method="POST">
-                Email:<br>
-                <input type="text" name="email" value="someone@nowhere.com">
-                <br>
-                Password:<br>
-                <input type="password" name="password" value="sesam">
-                <br>
-                <input type="submit" value="Submit">
-            </form>
-        </td>
-        <td>Or Register</td>
-        <td>
-            <form name="register" action="/register" method="POST">
-                Email:<br>
-                <input type="text" name="email" value="someone@nowhere.com">
-                <br>
-                Password:<br>
-                <input type="password" name="password1" value="sesam">
-                <br>
-                Retype Password:<br>
-                <input type="password" name="password2" value="sesam">
-                <br>
-                <input type="submit" value="Submit">
-            </form>
-        </td>
-    </tr>
-</table>
+<header class="frontpageheader">
+    <div class="text-box">
+        <h1 class="heading-primary">
+            <span class="heading-primary-main">Projecture</span>
+            <span class="heading-primary-sub">Project Management</span>
+        </h1>
+        <a href="#login/register" class="btn btn-white btn-animated">Get started</a>
+    </div>
+</header>
+
+
+<h1>Sign in or register</h1>
+
+
+<!-- login -->
+<form autocomplete='off' id="login/register" class='loginregisterform' action="/login" method="POST">
+    <div class='control'>
+        <h1>
+            Sign In
+        </h1>
+    </div>
+    <div class='control block-cube block-input'>
+        <input name="email" placeholder='Email' type='text' required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <div class='control block-cube block-input'>
+        <input name="password" placeholder='Password' type='password' required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <button class='btn block-cube block-cube-hover' type=submit>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='text'>
+            Log In
+        </div>
+    </button>
+</form>
+<!-- login end -->
+<br>
+<hr>
+<br>
+    <!-- register -->
+<form autocomplete='off' class='loginregisterform' action="/register" method="POST">
+    <div class='control'>
+        <h1>
+            Register
+        </h1>
+    </div>
+    <div class='control block-cube block-input'>
+        <input name="email" placeholder='Email' type='text' required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <div class='control block-cube block-input'>
+        <input name="password1" placeholder='Password' type='password' required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <div class='control block-cube block-input'>
+        <input name="password2" placeholder='Retype Password' type='password' required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <button class='btn block-cube block-cube-hover' type=submit>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='text'>
+            Register
+        </div>
+    </button>
+</form>
+    <!-- register end -->
+
+
+<!--    <table id="login/register">-->
+<!--        <tr>-->
+<!--            <td>Login</td>-->
+<!--            <td>-->
+<!--                <form name="login" action="/login" method="POST">-->
+<!--                    Email:<br>-->
+<!--                    <input type="text" name="email" value="someone@nowhere.com">-->
+<!--                    <br>-->
+<!--                    Password:<br>-->
+<!--                    <input type="password" name="password" value="sesam">-->
+<!--                    <br>-->
+<!--                    <input type="submit" value="Submit">-->
+<!--                </form>-->
+<!--            </td>-->
+
+
+<!--            <td>Or Register</td>-->
+<!--            <td>-->
+<!--                <form name="register" action="/register" method="POST">-->
+<!--                    Email:<br>-->
+<!--                    <input type="text" name="email" value="someone@nowhere.com">-->
+<!--                    <br>-->
+<!--                    Password:<br>-->
+<!--                    <input type="password" name="password1" value="sesam">-->
+<!--                    <br>-->
+<!--                    Retype Password:<br>-->
+<!--                    <input type="password" name="password2" value="sesam">-->
+<!--                    <br>-->
+<!--                    <input type="submit" value="Submit">-->
+<!--                </form>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+
 </body>
 <footer th:replace="fragments/footer.html"></footer>
 </html>

@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+
+
 <h1>This is home! :house:</h1>
 
 <p th:text="${session.user.email}" th:unless="${session == null}">[...]</p>
@@ -14,7 +17,7 @@
 
 <div>
     <form th:action="@{/makeproject}" method="POST">
-        <label for="name">Name of item:</label>
+        <label for="name">Name of Project:</label>
         <input type="text" id="name" name="name" required placeholder="Write project name here">
         <label for="name">week duration:</label>
         <input type="number" id="week" name="week_duration" required placeholder=" ex. 7 weeks">
@@ -39,6 +42,7 @@
     </tr>
     </tbody>
 </table>
+
 </body>
 <footer th:replace="fragments/footer.html"></footer>
 </html>
