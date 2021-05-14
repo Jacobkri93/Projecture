@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class SubtaskMapper {
 
-    public void createSubtask(Subtask subtask) {
+    public void createSubtask(Subtask subtask, Integer project_id) {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO subtasks (task_name, hours, cost, employees, project_id) VALUES (?,?,?,?,?)";
@@ -18,7 +18,7 @@ public class SubtaskMapper {
             ps.setInt(2, subtask.getHours());
             ps.setDouble(3, subtask.getCost());
             ps.setString(4, subtask.getEmployees());
-
+            ps.setInt(5,project_id.intValue());
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
             ps.executeUpdate();
@@ -29,9 +29,6 @@ public class SubtaskMapper {
         } catch (SQLException ex) {
 
         }
-
-
-
 
     }
 

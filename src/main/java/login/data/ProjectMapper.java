@@ -66,11 +66,12 @@ public class ProjectMapper {
     public Project addSubtaskToProject(User user, Subtask subtask) {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO project (user_id, subtask_id) VALUES (?,?)";
+            String SQL = "INSERT INTO subtasks (task_name, hours, cost, employees) VALUES (?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, user.getId());
-            ps.setInt(2, subtask.getId());
-
+            ps.setString(1, subtask.getTask_name());
+            ps.setInt(2, subtask.getHours());
+            ps.setDouble(3,subtask.getHours());
+            ps.setString(4, subtask.getEmployees());
             ps.executeUpdate();
 
         } catch (SQLException ex) {

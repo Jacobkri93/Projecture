@@ -23,7 +23,11 @@ public class Subtask {
         this.employees = employees;
     }
 
-
+    public Subtask(String task_name, int hours, String employees) {
+        this.task_name = task_name;
+        this.hours = hours;
+        this.employees = employees;
+    }
 
     public String getTask_name() {
         return task_name;

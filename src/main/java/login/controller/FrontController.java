@@ -70,7 +70,8 @@ public class FrontController {
         // Place project info on session
         request.setAttribute("name", project.getProject_name(), WebRequest.SCOPE_SESSION);
         request.setAttribute("week_duration", project.getWeek_duration(), WebRequest.SCOPE_SESSION);
-        request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
+        request.setAttribute("project",project, WebRequest.SCOPE_SESSION);
+        request.setAttribute("project_id",project.getProject_id(), WebRequest.SCOPE_SESSION);
         //Før var det project - nu project.getProject_name()
 
     }
@@ -85,7 +86,6 @@ public class FrontController {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project list = projectController.createProject(project_name, week_duration, user);
         setSessionInfoForProject(request, list, user);
-
         return "createProject";
     }
 
@@ -114,12 +114,15 @@ public class FrontController {
         Double cost = 0.0;
         String employees = request.getParameter("employees");
 
-
-        Subtask subtask = subtaskController.getSubtask(task_name,hours,cost,employees);
+        Integer project_id = (Integer) request.getAttribute("project_id",WebRequest.SCOPE_SESSION);
+        Subtask subtask = subtaskController.getSubtask(task_name,hours,cost,employees,project_id);
         if (subtask == null) {
-            subtask = subtaskController.createSubtask(new Subtask(task_name,hours,cost,employees));
+
+            subtask = subtaskController.createSubtask(task_name,hours,cost,employees,project_id);
         }
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+
+
         Project list = projectController.addToProject(user,subtask);
         setSessionInfoForSubtask(request,user,list);
 

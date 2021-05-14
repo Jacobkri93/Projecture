@@ -10,37 +10,28 @@ public class Project {
     private int user_id;
 
     public Project(String project_name, int week_duration) {
+        this.project_name = project_name;
+        this.week_duration = week_duration;
     }
 
-    public Project() {
-
-    }
-
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
+    public Project(int project_id, String project_name, int week_duration, ArrayList<Subtask> subtasklist, int user_id) {
+        this.project_id = project_id;
+        this.project_name = project_name;
+        this.week_duration = week_duration;
+        this.subtasklist = subtasklist;
         this.user_id = user_id;
     }
 
-
-
-    public ArrayList<Subtask> getSubtasklist() {
-        return subtasklist;
+    public Project(){
     }
 
-    public void setSubtasklist(ArrayList<Subtask> subtasklist) {
-        this.subtasklist = subtasklist;
+    public int getProject_id() {
+        return project_id;
     }
 
-
-
-
-
-
-
+    public void setProject_id(int project_id) {
+        this.project_id = project_id;
+    }
 
     public String getProject_name() {
         return project_name;
@@ -58,17 +49,20 @@ public class Project {
         this.week_duration = week_duration;
     }
 
-
-
-    public int getProject_id() {
-        return project_id;
+    public ArrayList<Subtask> getSubtasklist() {
+        return subtasklist;
     }
 
-    public void setProject_id(int project_id) {
-        this.project_id = project_id;
+    public void setSubtasklist(ArrayList<Subtask> subtasklist) {
+        this.subtasklist = subtasklist;
     }
 
+    public int getUser_id() {
+        return user_id;
+    }
 
-
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
 
 }
