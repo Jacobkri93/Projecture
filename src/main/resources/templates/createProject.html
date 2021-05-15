@@ -22,7 +22,6 @@
             <option value="Senior Developer">Senior Developer</option>
         </select>
         <button type="submit"> add subtask</button>
-        <input type="number" th:value="${session.project_id}" hidden name="project_id">
     </form>
 
 
@@ -38,7 +37,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="project_name : ${session.subtasks}">
+        <tr th:each="subtask : ${session.subtasks}">
             <td th:text="${subtask.task_name}"></td>
 
         </tr>

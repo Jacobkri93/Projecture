@@ -15,12 +15,16 @@ public class ProjectController {
         return project;
     }
 
-    public Project getProject(User user) {
+    public Project getProjectNew(Integer project_id) {
+        return this.facade.getProjectNew(project_id);
+    }
+    public Project getProject(User user){
         return this.facade.getProject(user);
     }
 
-    public Project addToProject(User user, Subtask subtask) {
-        return this.facade.addToList(user,subtask);
+    public Project addToProject(User user, Subtask subtask, Integer project_id) {
+        return this.facade.addToList(user,subtask,project_id);
     }
+
 
 }

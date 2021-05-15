@@ -9,6 +9,8 @@ public class Project {
     private ArrayList<Subtask> subtasklist;
     private int user_id;
 
+
+
     public Project(String project_name, int week_duration) {
         this.project_name = project_name;
         this.week_duration = week_duration;
@@ -25,7 +27,10 @@ public class Project {
     public Project(){
     }
 
-    public int getProject_id() {
+    public Project(int projectid, String project_name, int week_duration, int user_id) {
+    }
+
+    public int getProjectId() {
         return project_id;
     }
 
@@ -64,5 +69,14 @@ public class Project {
     public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
-
+    @Override
+    public String toString() {
+        return "Project{" +
+                "project_id=" + project_id +
+                ", project_name='" + project_name + '\'' +
+                ", week_duration=" + week_duration +
+                ", subtasklist=" + subtasklist +
+                ", user_id=" + user_id +
+                '}';
+    }
 }

@@ -2,6 +2,8 @@ package login.data;
 
 import login.domain.*;
 
+import java.util.ArrayList;
+
 public class DataFacadeImpl implements DataFacade {
    private UserMapper userMapper = new UserMapper();
    private ProjectMapper projectMapper = new ProjectMapper();
@@ -23,19 +25,26 @@ public class DataFacadeImpl implements DataFacade {
         return subtask;
     }
 
-    @Override
-    public  Subtask getSubtask(String subtask_name, int hours, double cost, String employees, Integer project_id) {
+    public  Subtask getSubtask(String subtask_name) {
        return subtaskMapper.getSubtask(subtask_name);
     }
 
-    @Override
-    public Project addToList(User user, Subtask subtask) {
-       return projectMapper.addSubtaskToProject(user, subtask);
+
+    public ArrayList<Subtask> getSubtaskList(Integer project_id) {
+        return subtaskMapper.getSubtaskList(project_id);
     }
 
-    @Override
-    public Project getProject(User user) {
-        return projectMapper.getProject(user);
+
+    public Project addToList(User user, Subtask subtask, Integer project_id) {
+       return projectMapper.addSubtaskToProject(user, subtask,project_id);
+    }
+
+
+    public Project getProjectNew(Integer project_id) {
+        return projectMapper.getProjectNew(project_id);
+    }
+    public Project getProject(User user){
+        return  projectMapper.getProject(user);
     }
 
 
@@ -44,12 +53,6 @@ public class DataFacadeImpl implements DataFacade {
         projectMapper.createProject(project, user);
         return project;
     }
-
-    @Override
-    public Subtask createSubtask(Subtask subtask) {
-        return null;
-    }
-
 
 }
 

@@ -19,20 +19,46 @@ public class ProjectMapper {
             ps.setString(1, project.getProject_name());
             ps.setInt(2, project.getWeek_duration());
             ps.setInt(3, user.getId());
+            ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
-            ps.executeUpdate();
+
             int id = ids.getInt(1);
             project.setProject_id(id);
 
 
         } catch (SQLException ex) {
-
+            ex.printStackTrace();
         }
 
 
     }
     //måske
+      public Project getProjectNew(Integer project_id){
+          Project project = new Project();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM project WHERE user_id=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1,project_id);
+
+            ResultSet rs = ps.executeQuery();
+
+            rs.next();
+            int projectid = rs.getInt("project_id");
+            String project_name = rs.getString("project_name");
+            int week_duration = rs.getInt("week_duration");
+            int user_id = rs.getInt("user_id");
+            project.setProject_id(projectid);
+            project.setProject_name(project_name);
+            project.setWeek_duration(week_duration);
+            project.setUser_id(user_id);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return project;
+      }
 
     public Project getProject(User user) {
         Project list = new Project();
@@ -63,19 +89,20 @@ public class ProjectMapper {
 
     }
 
-    public Project addSubtaskToProject(User user, Subtask subtask) {
+    public Project addSubtaskToProject(User user, Subtask subtask, Integer project_id) {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subtasks (task_name, hours, cost, employees) VALUES (?,?,?,?)";
+            String SQL = "INSERT INTO subtasks (task_name, hours, cost, employees,project_id) VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, subtask.getTask_name());
             ps.setInt(2, subtask.getHours());
-            ps.setDouble(3,subtask.getHours());
+            ps.setDouble(3,subtask.getCost());
             ps.setString(4, subtask.getEmployees());
+            ps.setInt(5,project_id);
             ps.executeUpdate();
 
         } catch (SQLException ex) {
         }
-        return getProject(user);
+        return getProjectNew(project_id);
     }
 }

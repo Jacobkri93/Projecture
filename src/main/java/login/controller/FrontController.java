@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.ArrayList;
+
 @Controller
 public class FrontController {
 
@@ -71,7 +73,7 @@ public class FrontController {
         request.setAttribute("name", project.getProject_name(), WebRequest.SCOPE_SESSION);
         request.setAttribute("week_duration", project.getWeek_duration(), WebRequest.SCOPE_SESSION);
         request.setAttribute("project",project, WebRequest.SCOPE_SESSION);
-        request.setAttribute("project_id",project.getProject_id(), WebRequest.SCOPE_SESSION);
+        request.setAttribute("project_id",project.getProjectId(), WebRequest.SCOPE_SESSION);
         //Før var det project - nu project.getProject_name()
 
     }
@@ -98,11 +100,12 @@ public class FrontController {
 //        request.setAttribute("employees", subtask.getEmployees(), WebRequest.SCOPE_SESSION);
 //    }
 
-    private void setSessionInfoForSubtask(WebRequest request, User user, Project list) {
+    private void setSessionInfoForSubtask(WebRequest request, User user, ArrayList<Subtask> list, String project_name) {
 
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        request.setAttribute("project",  list.getProject_name(), WebRequest.SCOPE_SESSION);
-        request.setAttribute("subtasks", list.getSubtasklist(), WebRequest.SCOPE_SESSION);
+        request.setAttribute("project",  project_name, WebRequest.SCOPE_SESSION);
+        request.setAttribute("subtasks", list, WebRequest.SCOPE_SESSION);
+
 
     }
 
@@ -115,28 +118,18 @@ public class FrontController {
         String employees = request.getParameter("employees");
 
         Integer project_id = (Integer) request.getAttribute("project_id",WebRequest.SCOPE_SESSION);
-        Subtask subtask = subtaskController.getSubtask(task_name,hours,cost,employees,project_id);
+        Subtask subtask = subtaskController.getSubtask(task_name);
         if (subtask == null) {
 
             subtask = subtaskController.createSubtask(task_name,hours,cost,employees,project_id);
         }
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-
-
-        Project list = projectController.addToProject(user,subtask);
-        setSessionInfoForSubtask(request,user,list);
+        ArrayList<Subtask> list = subtaskController.getSubtaskList(project_id);
+        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
+        setSessionInfoForSubtask(request,user,list,project.getProject_name());
 
         return "createProject";
     }
-
-
-
-
-
-
-
-
-
 
 
     @ExceptionHandler(Exception.class)

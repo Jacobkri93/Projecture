@@ -1,6 +1,9 @@
 package login.domain;
 
 public class Subtask {
+    public Subtask(int id, String task_name, int hours, double cost, String employees) {
+    }
+
     public int getId() {
         return id;
     }
@@ -61,5 +64,14 @@ public class Subtask {
         this.employees = employees;
     }
 
-
+    @Override
+    public String toString() {
+        return "Subtask{" +
+                "id=" + id +
+                ", task_name='" + task_name + '\'' +
+                ", hours=" + hours +
+                ", cost=" + cost +
+                ", employees='" + employees + '\'' +
+                '}';
+    }
 }
