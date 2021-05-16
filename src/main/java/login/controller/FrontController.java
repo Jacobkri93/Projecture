@@ -18,6 +18,7 @@ public class FrontController {
     private LoginController loginController = new LoginController(new DataFacadeImpl());
     private ProjectController projectController = new ProjectController(new DataFacadeImpl());
     private SubtaskController subtaskController = new SubtaskController(new DataFacadeImpl());
+    private RoleController roleController = new RoleController(new DataFacadeImpl());
 
 
     //Getmapping når vi skal have noget fra serveren. Betyder også html siderne.
@@ -34,7 +35,7 @@ public class FrontController {
 
         // delegate work + data to login controller
         User user = loginController.login(email, pwd);
-        Project list = projectController.getProject(user);
+        ArrayList<Project> list = projectController.getProject(user);
         setSessionInfo(request, user);
 
         // Go to to page dependent on role
@@ -64,6 +65,7 @@ public class FrontController {
 
     private void setSessionInfo(WebRequest request, User user) {
         // Place user info on session
+        request.setAttribute("project_list", projectController.getProject(user),WebRequest.SCOPE_SESSION);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("role", user, WebRequest.SCOPE_SESSION);
     }
@@ -72,8 +74,11 @@ public class FrontController {
         // Place project info on session
         request.setAttribute("name", project.getProject_name(), WebRequest.SCOPE_SESSION);
         request.setAttribute("week_duration", project.getWeek_duration(), WebRequest.SCOPE_SESSION);
-        request.setAttribute("project",project, WebRequest.SCOPE_SESSION);
-        request.setAttribute("project_id",project.getProjectId(), WebRequest.SCOPE_SESSION);
+        request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
+        request.setAttribute("project_id", project.getProjectId(), WebRequest.SCOPE_SESSION);
+
+//        added roles
+        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
         //Før var det project - nu project.getProject_name()
 
     }
@@ -88,6 +93,8 @@ public class FrontController {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project list = projectController.createProject(project_name, week_duration, user);
         setSessionInfoForProject(request, list, user);
+
+
         return "createProject";
     }
 
@@ -103,30 +110,33 @@ public class FrontController {
     private void setSessionInfoForSubtask(WebRequest request, User user, ArrayList<Subtask> list, String project_name) {
 
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        request.setAttribute("project",  project_name, WebRequest.SCOPE_SESSION);
+        request.setAttribute("project", project_name, WebRequest.SCOPE_SESSION);
         request.setAttribute("subtasks", list, WebRequest.SCOPE_SESSION);
 
 
     }
 
     @PostMapping(value = "/makesubtask")
-    public String createSubtask(WebRequest request)  {
+    public String createSubtask(WebRequest request) {
         String task_name = request.getParameter("task_name");
         Integer hours = Integer.valueOf(request.getParameter("hours"));
         //Double cost = Double.valueOf(request.getParameter("cost"));
         Double cost = 0.0;
         String employees = request.getParameter("employees");
 
-        Integer project_id = (Integer) request.getAttribute("project_id",WebRequest.SCOPE_SESSION);
-        Subtask subtask = subtaskController.getSubtask(task_name);
+        Integer project_id = (Integer) request.getAttribute("project_id", WebRequest.SCOPE_SESSION);
+        Subtask subtask = this.subtaskController.getSubtask(task_name, project_id);
         if (subtask == null) {
 
-            subtask = subtaskController.createSubtask(task_name,hours,cost,employees,project_id);
+            subtask = subtaskController.createSubtask(task_name, project_id);
+//            Kommentar: Her skal vi oprette ny subtask role:
+//            Ex.
+//            new Subtaskrole(hours, subtask.getId(),employees)
         }
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         ArrayList<Subtask> list = subtaskController.getSubtaskList(project_id);
-        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
-        setSessionInfoForSubtask(request,user,list,project.getProject_name());
+        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+        setSessionInfoForSubtask(request, user, list, project.getProject_name());
 
         return "createProject";
     }

@@ -1,9 +1,8 @@
 package login.data;
 
-import login.domain.Subtask;
 import login.domain.Project;
+import login.domain.Subtask;
 
-import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -13,14 +12,11 @@ public class SubtaskMapper {
 
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subtasks (task_name, hours, cost, employees, project_id) VALUES (?,?,?,?,?)";
+            String SQL = "INSERT INTO subtasks (task_name, project_id) VALUES (?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             // ps.setInt(1, project.getProject_id());
             ps.setString(1, subtask.getTask_name());
-            ps.setInt(2, subtask.getHours());
-            ps.setDouble(3, subtask.getCost());
-            ps.setString(4, subtask.getEmployees());
-            ps.setInt(5,project_id.intValue());
+            ps.setInt(2,project_id.intValue());
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -34,20 +30,16 @@ public class SubtaskMapper {
 
     }
 
-public Subtask getSubtask (String task_name) {
+public Subtask getSubtask (int subtask_id) {
     try {
         Connection con = DBManager.getConnection();
-        String SQL = "SELECT subtask_id, task_name, hours, cost,employees FROM subtasks where task_name = ?;";
+        String SQL = "SELECT subtask_id, task_name FROM subtasks where subtask_id = ?;";
         PreparedStatement ps = con.prepareStatement(SQL);
-        ps.setString(1, task_name);
+        ps.setInt(1, subtask_id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            int hours = rs.getInt("hours");
-            int id = rs.getInt("subtask_id");
-            double cost = rs.getDouble("cost");
-            String employees = rs.getString("employees");
-            Subtask subtask = new Subtask(task_name, hours, cost, employees);
-            subtask.setId(id);
+            String name = rs.getString("task_name");
+            Subtask subtask = new Subtask(subtask_id, name);
             return subtask;
         }
     } catch (SQLException ex) {
@@ -55,7 +47,7 @@ public Subtask getSubtask (String task_name) {
     return null;
 
 }
-public ArrayList<Subtask> getSubtaskList (Integer project_id){
+public ArrayList<Subtask> getSubtaskList (int project_id){
         ArrayList<Subtask> subtasks = new ArrayList();
         try {
             Connection con = DBManager.getConnection();
@@ -66,10 +58,7 @@ public ArrayList<Subtask> getSubtaskList (Integer project_id){
             while (rs.next()){
                 int id = rs.getInt("subtask_id");
                 String task_name = rs.getString("task_name");
-                int hours = rs.getInt("hours");
-                double cost = rs.getDouble("cost");
-                String employees = rs.getString("employees");
-                subtasks.add(new Subtask(id,task_name, hours, cost, employees));
+                subtasks.add(new Subtask(id,task_name));
             }
 
         } catch (SQLException throwables) {
@@ -77,4 +66,33 @@ public ArrayList<Subtask> getSubtaskList (Integer project_id){
         }
         return subtasks;
 }
+
+    public Subtask getSubtask(String task_name, int project_id) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT subtask_id, task_name FROM subtasks where task_name = ? AND project_id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, task_name);
+            ps.setInt(2, project_id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("subtask_id");
+                Subtask subtask = new Subtask(id, task_name, project_id);
+                return subtask;
+            }
+        } catch (SQLException ex) {
+        }
+        return null;
+    }
+
+    public void setProjectSubtask(ArrayList<Project> projects) {
+        for (int projectIndex = 0; projectIndex < projects.size(); projectIndex++) {
+            Project project = projects.get(projectIndex);
+            int projectId = project.getProjectId();
+            ArrayList<Subtask> subtasks = getSubtaskList(projectId);
+            project.setSubtasklist(subtasks);
+            projects.set(projectIndex, project);
+        }
+    }
 }

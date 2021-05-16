@@ -1,14 +1,16 @@
 package login.domain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Project {
     private int project_id;
     private String project_name;
     private int week_duration;
-    private ArrayList<Subtask> subtasklist;
     private int user_id;
 
+
+    private ArrayList<Subtask> subtasklist;
 
 
     public Project(String project_name, int week_duration) {

@@ -1,8 +1,6 @@
 package login.domain;
 
 public class Subtask {
-    public Subtask(int id, String task_name, int hours, double cost, String employees) {
-    }
 
     public int getId() {
         return id;
@@ -14,22 +12,21 @@ public class Subtask {
 
     private int id;
     private String task_name;
-    private int hours;
-    private Double cost;
-    private String employees;
+    private int project_id;
 
-
-    public Subtask(String task_name, int hours, double cost, String employees) {
+    public Subtask(int id, String task_name) {
+        this.id = id;
         this.task_name = task_name;
-        this.hours = hours;
-        this.cost = cost;
-        this.employees = employees;
     }
 
-    public Subtask(String task_name, int hours, String employees) {
+    public Subtask(int id, String task_name, int project_id) {
+        this.id = id;
         this.task_name = task_name;
-        this.hours = hours;
-        this.employees = employees;
+        this.project_id = project_id;
+    }
+
+    public Subtask(String task_name) {
+        this.task_name = task_name;
     }
 
     public String getTask_name() {
@@ -40,38 +37,13 @@ public class Subtask {
         this.task_name = task_name;
     }
 
-    public int getHours() {
-        return hours;
-    }
-
-    public void setHours(int hours) {
-        this.hours = hours;
-    }
-
-    public Double getCost() {
-        return cost;
-    }
-
-    public void setCost(Double cost) {
-        this.cost = cost;
-    }
-
-    public String getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(String employees) {
-        this.employees = employees;
-    }
 
     @Override
     public String toString() {
         return "Subtask{" +
                 "id=" + id +
                 ", task_name='" + task_name + '\'' +
-                ", hours=" + hours +
-                ", cost=" + cost +
-                ", employees='" + employees + '\'' +
+                '\'' +
                 '}';
     }
 }

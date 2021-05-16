@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`user`
     UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 16
+    AUTO_INCREMENT = 17
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -49,10 +49,26 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`project`
     CONSTRAINT `project_ibfk_1`
         FOREIGN KEY (`user_id`)
             REFERENCES `user_admin`.`user` (`user_id`)
-
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 8
+    AUTO_INCREMENT = 18
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `user_admin`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `user_admin`.`role`
+(
+    `id`          INT            NOT NULL AUTO_INCREMENT,
+    `description` VARCHAR(150)   NULL DEFAULT NULL,
+    `price`       DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `description_UNIQUE` (`description` ASC) VISIBLE
+)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 4
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -64,15 +80,37 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`subtasks`
 (
     `subtask_id` INT         NOT NULL AUTO_INCREMENT,
     `task_name`  VARCHAR(45) NULL DEFAULT NULL,
-    `hours`      INT         NULL DEFAULT NULL,
-    `cost`       DOUBLE      NULL DEFAULT NULL,
-    `employees`  VARCHAR(45) NULL DEFAULT NULL,
     `project_id` INT         NULL DEFAULT NULL,
     PRIMARY KEY (`subtask_id`),
     INDEX `project_id_idx` (`project_id` ASC) VISIBLE,
     CONSTRAINT `project_id`
         FOREIGN KEY (`project_id`)
             REFERENCES `user_admin`.`project` (`project_id`)
+)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 4
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `user_admin`.`subtaskrole`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `user_admin`.`subtaskrole`
+(
+    `id`         INT           NOT NULL AUTO_INCREMENT,
+    `hours`      DECIMAL(6, 2) NOT NULL,
+    `subtask_id` INT           NOT NULL,
+    `taskrole`   INT           NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `subtaskRole_idx` (`subtask_id` ASC) VISIBLE,
+    INDEX `taskrole_idx` (`taskrole` ASC) VISIBLE,
+    CONSTRAINT `subtask`
+        FOREIGN KEY (`subtask_id`)
+            REFERENCES `user_admin`.`subtasks` (`subtask_id`),
+    CONSTRAINT `taskrole`
+        FOREIGN KEY (`taskrole`)
+            REFERENCES `user_admin`.`role` (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
@@ -82,35 +120,4 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`subtasks`
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
-
-
-# CREATE SCHEMA IF NOT EXISTS `user_admin` ;
-#
-# CREATE TABLE IF NOT EXISTS `user_admin`.`user` (
-#   `user_id` INT NOT NULL AUTO_INCREMENT,
-#   `email` VARCHAR(90) NOT NULL,
-#   `password` VARCHAR(45) NOT NULL,
-# PRIMARY KEY (`user_id`),
-# UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
-#
-# CREATE TABLE `user_admin`.`project` (
-# `project_id` INT NOT NULL AUTO_INCREMENT,
-# `project_name` VARCHAR(45) NULL,
-# `week_duration` DATE NOT NULL,
-# user_id int,
-# PRIMARY KEY (project_id),
-# FOREIGN KEY (user_id) REFERENCES user(user_id));
-
-# CREATE TABLE `user_admin`.`subtask` (
-#     'subtask_id' INT NOT NULL AUTO_INCREMENT,
-#     'task_name' VARCHAR(45) NULL,
-#     'hours' INT,
-#     'cost' DOUBLE,
-#     'employees' VARCHAR(45) NULL,
-#     project_id int,
-#     primary key (subtask_id),
-#     FOREIGN KEY (project_id) REFERENCES project(project_id));
-
-
-
 

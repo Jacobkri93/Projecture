@@ -1,5 +1,7 @@
 package login.domain;
 
+import java.util.ArrayList;
+
 public class ProjectController {
 
     private DataFacade facade = null;
@@ -18,8 +20,8 @@ public class ProjectController {
     public Project getProjectNew(Integer project_id) {
         return this.facade.getProjectNew(project_id);
     }
-    public Project getProject(User user){
-        return this.facade.getProject(user);
+    public ArrayList<Project> getProject(User user){
+        return this.facade.getProjectList(user);
     }
 
     public Project addToProject(User user, Subtask subtask, Integer project_id) {

@@ -4,7 +4,6 @@ import login.domain.Project;
 import login.domain.Subtask;
 import login.domain.User;
 
-import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -33,14 +32,15 @@ public class ProjectMapper {
 
 
     }
-    //måske
-      public Project getProjectNew(Integer project_id){
-          Project project = new Project();
+
+
+    public Project getProjectNew(Integer project_id) {
+        Project project = new Project();
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT * FROM project WHERE user_id=?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1,project_id);
+            ps.setInt(1, project_id);
 
             ResultSet rs = ps.executeQuery();
 
@@ -58,33 +58,30 @@ public class ProjectMapper {
             throwables.printStackTrace();
         }
         return project;
-      }
+    }
 
-    public Project getProject(User user) {
-        Project list = new Project();
-        ArrayList<Subtask> subtasklist = new ArrayList<Subtask>();
+
+
+    public ArrayList<Project> getProject(User user) {
+        ArrayList<Project> projectList = new ArrayList<Project>();
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT subtasks.* FROM project join subtasks ON subtasks.subtask_id=project.subtask_id WHERE project.user_id=?)";
+            String SQL = "SELECT * FROM project WHERE project.user_id=?)";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, user.getId());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String task_name = rs.getString("task_name");
-                int hours = rs.getInt("hours");
-                double cost = rs.getDouble("cost");
-                String employees = rs.getString("employess");
-                int id = rs.getInt("id");
-                Subtask subtask = new Subtask(task_name, hours, cost, employees);
-                subtask.setId(id);
-                subtasklist.add(subtask);
+                int id = rs.getInt("project_id");
+                String name = rs.getString("project_name");
+                int week_duration = rs.getInt("week_duration");
+                Project project = new Project(id, name, week_duration, user.getId());
+
+                projectList.add(project);
             }
         } catch (SQLException ex) {
         }
-        list.setSubtasklist(subtasklist);
-        list.setUser_id(user.getId());
-        return list;
+        return projectList;
 
 
     }
@@ -92,13 +89,11 @@ public class ProjectMapper {
     public Project addSubtaskToProject(User user, Subtask subtask, Integer project_id) {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subtasks (task_name, hours, cost, employees,project_id) VALUES (?,?,?,?,?)";
+            String SQL = "INSERT INTO subtasks (task_name, project_id) VALUES (?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, subtask.getTask_name());
-            ps.setInt(2, subtask.getHours());
-            ps.setDouble(3,subtask.getCost());
-            ps.setString(4, subtask.getEmployees());
-            ps.setInt(5,project_id);
+
+            ps.setInt(2, project_id);
             ps.executeUpdate();
 
         } catch (SQLException ex) {
