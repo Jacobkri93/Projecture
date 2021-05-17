@@ -4,12 +4,12 @@ public class SubtaskRole {
     private int id;
     private double hours;
     private int subtask_id;
-    private int taskrole;
+    private int taskrole_id;
 
-    public SubtaskRole(double hours, int subtask_id, int taskrole) {
+    public SubtaskRole(double hours, int subtask_id, int taskrole_id) {
         this.hours = hours;
         this.subtask_id = subtask_id;
-        this.taskrole = taskrole;
+        this.taskrole_id = taskrole_id;
     }
 
     public int getId() {
@@ -36,11 +36,13 @@ public class SubtaskRole {
         this.subtask_id = subtask_id;
     }
 
-    public int getTaskrole() {
-        return taskrole;
+    public int getTaskrole_id() {
+        return taskrole_id;
     }
 
-    public void setTaskrole(int taskrole) {
-        this.taskrole = taskrole;
+    public void setTaskrole_id(int taskrole) {
+        this.taskrole_id = taskrole;
     }
+
+
 }

@@ -9,6 +9,8 @@ public class DataFacadeImpl implements DataFacade {
     private ProjectMapper projectMapper = new ProjectMapper();
     private SubtaskMapper subtaskMapper = new SubtaskMapper();
     private RoleMapper roleMapper = new RoleMapper();
+    private SubtaskRoleMapper subtaskRoleMapper = new SubtaskRoleMapper();
+
 
 
     public User login(String email, String password) throws LoginSampleException {
@@ -36,14 +38,24 @@ public class DataFacadeImpl implements DataFacade {
     public ArrayList<Project> getProjectList(User user) {
         ArrayList<Project> projectList = projectMapper.getProject(user);
         subtaskMapper.setProjectSubtask(projectList);
-//       Her skal subtask roles mappes til subtasks
-//        Her skal roles mappes til subtask roles
+
+
+//        subtaskRoleMapper.addRoletoSubtask();
+        roleMapper.getRoles();
+
+//       Her skal subtaskroles mappes til subtasks
+//        Her skal roles mappes til subtaskroles
         return projectList;
     }
 
     @Override
     public ArrayList<Role> getRoles() {
         return this.roleMapper.getRoles();
+    }
+
+
+    public ArrayList<SubtaskRole> getSubtaskRole() {
+        return null;
     }
 
 

@@ -7,7 +7,9 @@
 <body>
 <h1>An Error Occured!</h1>
 <p><span th:text="${message}"></span></p>
-<button type="button" onclick="/localhost:8080/" >Go back</button>
+<form>
+    <input type="button" value="Go back!" onclick="history.back()">
+</form>
 </body>
 <footer th:replace="fragments/footer.html"></footer>
 </html>

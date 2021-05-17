@@ -2,6 +2,10 @@ package login.domain;
 
 public class Subtask {
 
+    public Subtask() {
+
+    }
+
     public int getId() {
         return id;
     }

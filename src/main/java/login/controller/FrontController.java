@@ -19,6 +19,8 @@ public class FrontController {
     private ProjectController projectController = new ProjectController(new DataFacadeImpl());
     private SubtaskController subtaskController = new SubtaskController(new DataFacadeImpl());
     private RoleController roleController = new RoleController(new DataFacadeImpl());
+    private SubtaskRoleController subtaskRoleController = new SubtaskRoleController(new DataFacadeImpl());
+
 
 
     //Getmapping når vi skal have noget fra serveren. Betyder også html siderne.
@@ -55,7 +57,6 @@ public class FrontController {
             User user = loginController.createUser(email, password1);
             setSessionInfo(request, user);
 
-            //
             return "home";
 
         } else { // If passwords don't match, an exception is thrown
@@ -79,7 +80,7 @@ public class FrontController {
 
 //        added roles
         request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
-        //Før var det project - nu project.getProject_name()
+
 
     }
 
@@ -89,7 +90,6 @@ public class FrontController {
     public String createProject(WebRequest request) {
         String project_name = request.getParameter("name");
         int week_duration = Integer.valueOf(request.getParameter("week_duration"));
-        //  Project project = projectController.createProject(project_name, user);
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project list = projectController.createProject(project_name, week_duration, user);
         setSessionInfoForProject(request, list, user);
@@ -126,9 +126,11 @@ public class FrontController {
 
         Integer project_id = (Integer) request.getAttribute("project_id", WebRequest.SCOPE_SESSION);
         Subtask subtask = this.subtaskController.getSubtask(task_name, project_id);
+        ArrayList<SubtaskRole> subtaskRole = this.subtaskRoleController.getSubtaskRole();
         if (subtask == null) {
 
             subtask = subtaskController.createSubtask(task_name, project_id);
+            subtaskRole = subtaskRoleController.getSubtaskRole();
 //            Kommentar: Her skal vi oprette ny subtask role:
 //            Ex.
 //            new Subtaskrole(hours, subtask.getId(),employees)
