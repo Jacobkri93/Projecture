@@ -32,24 +32,24 @@ public class SubtaskRoleMapper {
         list.setTaskrole_id(role.getId());
         return list;
     }
-//
-//
-//    public Subtask addRoletoSubtask (SubtaskRole subtaskRole) {
-//        Subtask subtask = new Subtask();
-//        try {
-//            Connection con = DBManager.getConnection();
-//            String SQL = "INSERT INTO subtaskrole (hours, subtask_id, taskrole_id) VALUES (?,?,?)";
-//            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-//            ps.setDouble(1, subtaskRole.getHours());
-//            ps.setInt(2, subtaskRole.getSubtask_id());
-//            ps.setInt(3, subtaskRole.getTaskrole_id());
-//
-//            ps.executeUpdate();
-//
-//        } catch (SQLException ex) {
-//        }
-//        return subtask;
-//    }
+
+
+    public Subtask addRoletoSubtask (SubtaskRole subtaskRole) {
+        Subtask subtask = new Subtask();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subtaskrole (hours, subtask_id, taskrole_id) VALUES (?,?,?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setDouble(1, subtaskRole.getHours());
+            ps.setInt(2, subtaskRole.getSubtask_id());
+            ps.setInt(3, subtaskRole.getTaskrole_id());
+
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+        }
+        return subtask;
+    }
 
 
 }

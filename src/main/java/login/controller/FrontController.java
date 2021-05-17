@@ -40,7 +40,6 @@ public class FrontController {
         ArrayList<Project> list = projectController.getProject(user);
         setSessionInfo(request, user);
 
-
         return "home";
     }
 
@@ -78,11 +77,18 @@ public class FrontController {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
         request.setAttribute("project_id", project.getProjectId(), WebRequest.SCOPE_SESSION);
 
+//        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
 //        added roles
-        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
-
 
     }
+    private void setSessionInfoForSubtask(WebRequest request, User user, ArrayList<Subtask> list, String project_name) {
+        //Place subtask info on session
+        request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
+        request.setAttribute("project", project_name, WebRequest.SCOPE_SESSION);
+        request.setAttribute("subtasks", list, WebRequest.SCOPE_SESSION);
+        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
+    }
+
 
 
     //vi pegede på et object og forventede en string.
@@ -99,35 +105,25 @@ public class FrontController {
     }
 
 
-//    private void setSessionInfoForSubtask(WebRequest request, Subtask subtask, Project project) {
-//
-//        request.setAttribute("task_name", subtask.getTask_name(), WebRequest.SCOPE_SESSION);
-//        request.setAttribute("hours", subtask.getHours(), WebRequest.SCOPE_SESSION);
-//        request.setAttribute("cost", subtask.getCost(), WebRequest.SCOPE_SESSION);
-//        request.setAttribute("employees", subtask.getEmployees(), WebRequest.SCOPE_SESSION);
-//    }
-
-    private void setSessionInfoForSubtask(WebRequest request, User user, ArrayList<Subtask> list, String project_name) {
-
-        request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        request.setAttribute("project", project_name, WebRequest.SCOPE_SESSION);
-        request.setAttribute("subtasks", list, WebRequest.SCOPE_SESSION);
 
 
-    }
 
     @PostMapping(value = "/makesubtask")
     public String createSubtask(WebRequest request) {
-        String task_name = request.getParameter("task_name");
+        String task_name = request.getParameter("task_name", );
         int hours = Integer.valueOf(request.getParameter("hours"));
-
         String employees = request.getParameter("employees");
-
         Integer project_id = (Integer) request.getAttribute("project_id", WebRequest.SCOPE_SESSION);
+
+
+
         Subtask subtask = this.subtaskController.getSubtask(task_name, project_id);
+//        SubtaskRole subtaskRole = this.subtaskRoleController.getSubtaskRole(Role role);
 
         if (subtask == null) {
             subtask = subtaskController.createSubtask(task_name, project_id);
+
+
 
 
 //            Kommentar: Her skal vi oprette ny subtask role:
