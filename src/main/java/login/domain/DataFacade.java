@@ -14,6 +14,6 @@ public interface DataFacade {
     Project getProjectNew(Integer project_id);
     ArrayList<Project> getProjectList(User user);
     ArrayList<Role> getRoles();
-    ArrayList<SubtaskRole> getSubtaskRole();
+    SubtaskRole getSubtaskRole(Role role);
 
 }

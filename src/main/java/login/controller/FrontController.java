@@ -119,18 +119,17 @@ public class FrontController {
     @PostMapping(value = "/makesubtask")
     public String createSubtask(WebRequest request) {
         String task_name = request.getParameter("task_name");
-        Integer hours = Integer.valueOf(request.getParameter("hours"));
-        //Double cost = Double.valueOf(request.getParameter("cost"));
-        Double cost = 0.0;
+        int hours = Integer.valueOf(request.getParameter("hours"));
+
         String employees = request.getParameter("employees");
 
         Integer project_id = (Integer) request.getAttribute("project_id", WebRequest.SCOPE_SESSION);
         Subtask subtask = this.subtaskController.getSubtask(task_name, project_id);
-        ArrayList<SubtaskRole> subtaskRole = this.subtaskRoleController.getSubtaskRole();
-        if (subtask == null) {
 
+        if (subtask == null) {
             subtask = subtaskController.createSubtask(task_name, project_id);
-            subtaskRole = subtaskRoleController.getSubtaskRole();
+
+
 //            Kommentar: Her skal vi oprette ny subtask role:
 //            Ex.
 //            new Subtaskrole(hours, subtask.getId(),employees)

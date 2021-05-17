@@ -8,8 +8,6 @@ public class Project {
     private String project_name;
     private int week_duration;
     private int user_id;
-
-
     private ArrayList<Subtask> subtasklist;
 
 

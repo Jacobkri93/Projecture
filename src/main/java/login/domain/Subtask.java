@@ -1,5 +1,7 @@
 package login.domain;
 
+import java.util.ArrayList;
+
 public class Subtask {
 
     public Subtask() {
@@ -17,6 +19,7 @@ public class Subtask {
     private int id;
     private String task_name;
     private int project_id;
+
 
     public Subtask(int id, String task_name) {
         this.id = id;

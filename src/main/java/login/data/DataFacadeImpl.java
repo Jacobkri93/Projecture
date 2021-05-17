@@ -39,10 +39,7 @@ public class DataFacadeImpl implements DataFacade {
         ArrayList<Project> projectList = projectMapper.getProject(user);
         subtaskMapper.setProjectSubtask(projectList);
 
-
-//        subtaskRoleMapper.addRoletoSubtask();
         roleMapper.getRoles();
-
 //       Her skal subtaskroles mappes til subtasks
 //        Her skal roles mappes til subtaskroles
         return projectList;
@@ -54,8 +51,8 @@ public class DataFacadeImpl implements DataFacade {
     }
 
 
-    public ArrayList<SubtaskRole> getSubtaskRole() {
-        return null;
+    public SubtaskRole getSubtaskRole(Role role) {
+        return this.subtaskRoleMapper.getSubtaskRole(role);
     }
 
 

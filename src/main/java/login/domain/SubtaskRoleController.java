@@ -9,7 +9,7 @@ public class SubtaskRoleController {
         this.facade = facade;
     }
 
-    public ArrayList<SubtaskRole> getSubtaskRole(){
-        return facade.getSubtaskRole();
+    public SubtaskRole getSubtaskRole(Role role){
+        return facade.getSubtaskRole(role);
     }
 }

@@ -1,15 +1,23 @@
 package login.domain;
 
+import java.util.ArrayList;
+
 public class SubtaskRole {
     private int id;
     private double hours;
     private int subtask_id;
     private int taskrole_id;
 
+    private ArrayList<Subtask> subtaskList;
+
     public SubtaskRole(double hours, int subtask_id, int taskrole_id) {
         this.hours = hours;
         this.subtask_id = subtask_id;
         this.taskrole_id = taskrole_id;
+    }
+
+    public SubtaskRole() {
+
     }
 
     public int getId() {
@@ -44,5 +52,11 @@ public class SubtaskRole {
         this.taskrole_id = taskrole;
     }
 
+    public void setSubtaskList(ArrayList<Subtask> subtaskList){
+        this.subtaskList = subtaskList;
+    }
 
+    public ArrayList<Subtask> getSubtaskList() {
+        return subtaskList;
+    }
 }

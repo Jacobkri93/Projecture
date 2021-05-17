@@ -12,7 +12,7 @@ public class SubtaskMapper {
 
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subtasks (task_name, project_id) VALUES (?,?)";
+            String SQL = "INSERT INTO subtask (task_name, project_id) VALUES (?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, subtask.getTask_name());
             ps.setInt(2,project_id.intValue());
@@ -50,7 +50,7 @@ public ArrayList<Subtask> getSubtaskList (int project_id){
         ArrayList<Subtask> subtasks = new ArrayList();
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM subtasks WHERE project_id = ?";
+            String SQL = "SELECT * FROM subtask WHERE project_id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, project_id);
             ResultSet rs = ps.executeQuery();
@@ -69,7 +69,7 @@ public ArrayList<Subtask> getSubtaskList (int project_id){
     public Subtask getSubtask(String task_name, int project_id) {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT subtask_id, task_name FROM subtasks where task_name = ? AND project_id = ?;";
+            String SQL = "SELECT subtask_id, task_name FROM subtask where task_name = ? AND project_id = ?;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, task_name);
             ps.setInt(2, project_id);

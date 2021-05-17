@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class RoleMapper {
 
     public ArrayList<Role> getRoles() {
-//        getRolesFromSubtask
+
         ArrayList<Role> roles = new ArrayList<Role>();
 
         try {
