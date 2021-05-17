@@ -38,7 +38,7 @@ public class FrontController {
         ArrayList<Project> list = projectController.getProject(user);
         setSessionInfo(request, user);
 
-        // Go to to page dependent on role
+
         return "home";
     }
 
@@ -50,7 +50,7 @@ public class FrontController {
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
 
-        // If passwords match, work + data is delegated to logic controller
+        // If passwords match, work + data is delegated to login controller
         if (password1.equals(password2)) {
             User user = loginController.createUser(email, password1);
             setSessionInfo(request, user);
