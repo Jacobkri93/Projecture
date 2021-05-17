@@ -20,6 +20,7 @@ public class ProjectController {
     public Project getProjectNew(Integer project_id) {
         return this.facade.getProjectNew(project_id);
     }
+
     public ArrayList<Project> getProject(User user){
         return this.facade.getProjectList(user);
     }
