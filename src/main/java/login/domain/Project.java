@@ -27,7 +27,11 @@ public class Project {
     public Project(){
     }
 
-    public Project(int projectid, String project_name, int week_duration, int user_id) {
+    public Project(int project_id, String project_name, int week_duration, int user_id) {
+        this.project_id = project_id;
+        this.project_name = project_name;
+        this.week_duration = week_duration;
+        this.user_id = user_id;
     }
 
     public int getProjectId() {

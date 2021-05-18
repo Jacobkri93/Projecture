@@ -66,9 +66,11 @@ public class ProjectMapper {
         ArrayList<Project> projectList = new ArrayList<Project>();
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM project WHERE project.user_id=?)";
+            String SQL = "SELECT * FROM project WHERE project.user_id=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, user.getId());
+
+
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -80,6 +82,7 @@ public class ProjectMapper {
                 projectList.add(project);
             }
         } catch (SQLException ex) {
+            System.out.println(ex);
         }
         return projectList;
 

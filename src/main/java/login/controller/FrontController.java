@@ -68,6 +68,9 @@ public class FrontController {
         request.setAttribute("project_list", projectController.getProject(user),WebRequest.SCOPE_SESSION);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("role", user, WebRequest.SCOPE_SESSION);
+        //laver med crof
+//        ArrayList<Project> projectsx = projectController.getProject(user);
+//        request.setAttribute("projects", projectController.getProject(user), WebRequest.SCOPE_SESSION);
     }
 
     private void setSessionInfoForProject(WebRequest request, Project project, User user) {
@@ -76,6 +79,8 @@ public class FrontController {
         request.setAttribute("week_duration", project.getWeek_duration(), WebRequest.SCOPE_SESSION);
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
         request.setAttribute("project_id", project.getProjectId(), WebRequest.SCOPE_SESSION);
+
+
 
 //        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
 //        added roles

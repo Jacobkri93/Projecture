@@ -1,47 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/style.css">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(pageTitle = 'Homepage - Projecture 🎁')">
 </head>
+
 <body>
 
 
-<h1>This is home! :house:</h1>
+<h1>You're logged in as:</h1>
 
 <p th:text="${session.user.email}" th:unless="${session == null}">[...]</p>
-<p th:text="${session.user.password}" th:unless="${session == null}">[...]</p>
+<!--<p th:text="${session.user.password}" th:unless="${session == null}">[...]</p>-->
 
 <hr style="border-color: Black">
 
 <div>
     <form th:action="@{/makeproject}" method="POST">
-        <label for="name">Name of Project:</label>
-        <input type="text" id="name" name="name" required placeholder="Write project name here"> <br>
-        <label for="name">week duration:</label>
-        <input type="number" id="week" name="week_duration" required placeholder=" ex. 7 weeks">
-
+        <div class="form-input">
+            <label for="name">Name of Project:</label>
+            <input type="text" id="name" name="name" required placeholder="Write project name here">
+        </div>
+        <div class="form-input">
+            <label for="name">week duration:</label>
+            <input type="number" id="week" name="week_duration" required placeholder=" ex. 7 weeks">
+        </div>
         <button type="submit"> Start Project</button>
     </form>
 </div>
+<div class="span-2">
+    <p class="no margin"> Ongoing Projects:</p>
+    <table class="table_home">
+        <thead class="thead_home">
+        <tr>
+            <th>Name:</th>
+            <th>Project ID:</th>
+            <th>Week Duration:</th>
 
-<table class="table">
-    <thead class="thead">
-    <tr>
-        <th>Name:</th>
-        <th>Description:</th>
-        <th>Price:</th>
+        </tr>
+        </thead>
+        <tbody class="tbody_home">
+        <tr th:each="project : ${session.project_list}">
+            <td th:text="${project.getProject_name()}"></td>
+            <td th:text="${project.getProjectId()}"></td>
+            <td th:text="${project.getWeek_duration()}"></td>
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="project_name : ${session.items}">
-        <td th:text="${item.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-    </tr>
-    </tbody>
-</table>
 </body>
 <footer th:replace="fragments/footer.html"></footer>
 </html>

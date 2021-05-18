@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"><head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/style.css">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(pageTitle = 'createProject - Projecture 🎁')">
 </head>
 <body>
 <h1>Project Creation page</h1>
-<p th:text="${session.name}" th:unless="${session == null}">[...]</p>
-<p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
+<div>
+    <th>
+        Project Name:
+    </th>
+    <p th:text="${session.name}" th:unless="${session == null}">[...]</p>
+    <th>
+        Week Duration:
+    </th>
+    <p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
+</div>
+
 <div>
     <form th:action="@{/makesubtask}" method="POST">
-        <label for="sub_name">Subtask name:</label>
-        <input type="text" id="sub_name" name="task_name" size="20">
-        <select >
-            <input name="employees" id="sub_emp" type="checkbox" th:each="i: ${session.roles}" th:value="${i.id}" th:text="${i.description}">
-<!--        Mangler hours til hver role-->
+        <div class="form-input">
+            <label for="sub_name">Subtask name:</label>
+            <input type="text" id="sub_name" name="task_name" size="20">
+        </div>
+        <div>
+            <select >
+                <input name="employees" id="sub_emp" type="checkbox" th:each="i: ${session.roles}" th:value="${i.id}" th:text="${i.description}">
+                <!--        Mangler hours til hver role-->
 
-<!--            <option  th:each="i : ${session.roles}" th:value="${i.id}" th:text="${i.description}"-->
-<!--                    th:selected="${i.description=='Developer'}"></option>-->
-        </select>
-        <label for="sub_hours">Duration in hours:</label>
-        <input type="number" id="sub_hours" name="hours" min="1" max="99">
+                <!--            <option  th:each="i : ${session.roles}" th:value="${i.id}" th:text="${i.description}"-->
+                <!--                    th:selected="${i.description=='Developer'}"></option>-->
+            </select>
+        </div>
+        <div class="form-input">
+            <label for="sub_hours">Duration in hours:</label>
+            <input type="number" id="sub_hours" name="hours" min="1" max="99">
+        </div>
         <button type="submit"> add subtask</button>
     </form>
 
