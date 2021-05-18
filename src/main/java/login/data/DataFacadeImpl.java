@@ -50,9 +50,10 @@ public class DataFacadeImpl implements DataFacade {
         return this.roleMapper.getRoles();
     }
 
+    @Override
+    public ArrayList<Role> getRolesFromSubtask(Subtask subtask) {
 
-    public SubtaskRole getSubtaskRole(Role role) {
-        return this.subtaskRoleMapper.getSubtaskRole(role);
+        return subtaskRoleMapper.getRolesFromSubtask(subtask);
     }
 
 

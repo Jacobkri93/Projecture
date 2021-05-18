@@ -12,13 +12,13 @@
     <form th:action="@{/makesubtask}" method="POST">
         <label for="sub_name">Subtask name:</label>
         <input type="text" id="sub_name" name="task_name" size="20">
-<!--        <select >-->
+        <select >
             <input name="employees" id="sub_emp" type="checkbox" th:each="i: ${session.roles}" th:value="${i.id}" th:text="${i.description}">
 <!--        Mangler hours til hver role-->
 
 <!--            <option  th:each="i : ${session.roles}" th:value="${i.id}" th:text="${i.description}"-->
 <!--                    th:selected="${i.description=='Developer'}"></option>-->
-<!--        </select>-->
+        </select>
         <label for="sub_hours">Duration in hours:</label>
         <input type="number" id="sub_hours" name="hours" min="1" max="99">
         <button type="submit"> add subtask</button>

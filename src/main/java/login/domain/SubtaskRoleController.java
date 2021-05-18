@@ -9,7 +9,9 @@ public class SubtaskRoleController {
         this.facade = facade;
     }
 
-    public SubtaskRole getSubtaskRole(Role role){
-        return facade.getSubtaskRole(role);
+    public ArrayList<Role> getRolesFromSubtask(Subtask subtask){
+        return this.facade.getRolesFromSubtask(subtask);
     }
+
+
 }
