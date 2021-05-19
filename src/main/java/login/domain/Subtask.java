@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 public class Subtask {
 
-    public Subtask() {
 
-    }
 
     public int getId() {
         return id;
@@ -20,7 +18,9 @@ public class Subtask {
     private String task_name;
     private int project_id;
 
+    public Subtask() {
 
+    }
     public Subtask(int id, String task_name) {
         this.id = id;
         this.task_name = task_name;

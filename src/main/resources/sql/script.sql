@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`project` (
     FOREIGN KEY (`user_id`)
     REFERENCES `user_admin`.`user` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 34
+AUTO_INCREMENT = 35
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
