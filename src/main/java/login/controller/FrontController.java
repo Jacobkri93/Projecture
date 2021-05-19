@@ -1,6 +1,5 @@
 package login.controller;
 
-import login.data.DataFacadeImpl;
 import login.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +13,13 @@ import java.util.ArrayList;
 @Controller
 public class FrontController {
 
-    //use case controller (GRASP Controller) - injects concrete facade instance into controller
-    private LoginController loginController = new LoginController(new DataFacadeImpl());
-    private ProjectController projectController = new ProjectController(new DataFacadeImpl());
-    private SubtaskController subtaskController = new SubtaskController(new DataFacadeImpl());
-    private RoleController roleController = new RoleController(new DataFacadeImpl());
-    private SubtaskRoleController subtaskRoleController = new SubtaskRoleController(new DataFacadeImpl());
-
-
+    // use case controller (GRASP Controller) - injects concrete facade instance into controller
+    private LoginController loginController = new LoginController();
+    private ProjectController projectController = new ProjectController();
+    private SubtaskController subtaskController = new SubtaskController();
+    private RoleController roleController = new RoleController();
+    private SubtaskRoleController subtaskRoleController = new SubtaskRoleController();
+    private SessionController sessionController = new SessionController();
 
     //Getmapping når vi skal have noget fra serveren. Betyder også html siderne.
     @GetMapping("/")
@@ -29,109 +27,27 @@ public class FrontController {
         return "index";
     }
 
-    @PostMapping("/login")
-    public String loginUser(WebRequest request) throws LoginSampleException {
-        //Retrieve values from HTML form via WebRequest
-        String email = request.getParameter("email");
-        String pwd = request.getParameter("password");
-
-        // delegate work + data to login controller
-        User user = loginController.login(email, pwd);
-        ArrayList<Project> list = projectController.getProject(user);
-        setSessionInfo(request, user);
-
-        return "home";
-    }
-
-    //postmapping når vi skal give noget til serveren.
-    @PostMapping("/register")
-    public String createUser(WebRequest request) throws LoginSampleException {
-        //Retrieve values from HTML form via WebRequest
-        String email = request.getParameter("email");
-        String password1 = request.getParameter("password1");
-        String password2 = request.getParameter("password2");
-
-        // If passwords match, work + data is delegated to login controller
-        if (password1.equals(password2)) {
-            User user = loginController.createUser(email, password1);
-            setSessionInfo(request, user);
-
-            return "home";
-
-        } else { // If passwords don't match, an exception is thrown
-            throw new LoginSampleException("The two passwords did not match");
-        }
-    }
-
-    private void setSessionInfo(WebRequest request, User user) {
-        // Place user info on session
-        request.setAttribute("project_list", projectController.getProject(user),WebRequest.SCOPE_SESSION);
-        request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        request.setAttribute("role", user, WebRequest.SCOPE_SESSION);
-        //laver med crof
-//        ArrayList<Project> projectsx = projectController.getProject(user);
-//        request.setAttribute("projects", projectController.getProject(user), WebRequest.SCOPE_SESSION);
-    }
-
-    private void setSessionInfoForProject(WebRequest request, Project project, User user) {
-        // Place project info on session
-        request.setAttribute("name", project.getProject_name(), WebRequest.SCOPE_SESSION);
-        request.setAttribute("week_duration", project.getWeek_duration(), WebRequest.SCOPE_SESSION);
-        request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
-        request.setAttribute("project_id", project.getProjectId(), WebRequest.SCOPE_SESSION);
-
-
-
-//        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
-//        added roles
-
-    }
-    private void setSessionInfoForSubtask(WebRequest request, User user, ArrayList<Subtask> list, String project_name) {
-        //Place subtask info on session
-        request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        request.setAttribute("project", project_name, WebRequest.SCOPE_SESSION);
-        request.setAttribute("subtasks", list, WebRequest.SCOPE_SESSION);
-        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
-//        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
-    }
-
-
-
-    //vi pegede på et object og forventede en string.
     @PostMapping(value = "/makeproject")
     public String createProject(WebRequest request) {
         String project_name = request.getParameter("name");
         int week_duration = Integer.valueOf(request.getParameter("week_duration"));
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project list = projectController.createProject(project_name, week_duration, user);
-        setSessionInfoForProject(request, list, user);
-
-
+        sessionController.setSessionInfoForProject(request, list);
         return "createProject";
     }
-
-
-
 
 
     @PostMapping(value = "/makesubtask")
     public String createSubtask(WebRequest request) {
         String task_name = request.getParameter("task_name");
         Integer project_id = (Integer) request.getAttribute("project_id", WebRequest.SCOPE_SESSION);
-
-
 //        String description = request.getParameter("description");
         int hours = Integer.valueOf(request.getParameter("hours"));
-
         Subtask subtask = this.subtaskController.getSubtask(task_name, project_id);
 //        SubtaskRole subtaskRole = this.subtaskRoleController.getRolesFromSubtask(SubtaskRole);
-
         if (subtask == null) {
             subtask = subtaskController.createSubtask(task_name, project_id);
-
-
-
-
 //            Kommentar: Her skal vi oprette ny subtask role:
 //            Ex.
 //            new Subtaskrole(hours, subtask.getId(),employees)
@@ -139,11 +55,9 @@ public class FrontController {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         ArrayList<Subtask> list = subtaskController.getSubtaskList(project_id);
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-        setSessionInfoForSubtask(request, user, list, project.getProject_name());
-
+        sessionController.setSessionInfoForSubtask(request, user, list, project.getProject_name());
         return "createProject";
     }
-
 
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {

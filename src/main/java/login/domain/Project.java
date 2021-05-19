@@ -10,12 +10,10 @@ public class Project {
     private int user_id;
     private ArrayList<Subtask> subtasklist;
 
-
     public Project(String project_name, int week_duration) {
         this.project_name = project_name;
         this.week_duration = week_duration;
     }
-
     public Project(int project_id, String project_name, int week_duration, ArrayList<Subtask> subtasklist, int user_id) {
         this.project_id = project_id;
         this.project_name = project_name;
@@ -23,7 +21,6 @@ public class Project {
         this.subtasklist = subtasklist;
         this.user_id = user_id;
     }
-
     public Project(){
     }
 
@@ -33,7 +30,6 @@ public class Project {
         this.week_duration = week_duration;
         this.user_id = user_id;
     }
-
     public int getProjectId() {
         return project_id;
     }

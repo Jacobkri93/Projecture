@@ -15,11 +15,8 @@ public class SubtaskRole {
         this.subtask_id = subtask_id;
         this.taskrole_id = taskrole_id;
     }
-
     public SubtaskRole() {
-
     }
-
     public int getId() {
         return id;
     }

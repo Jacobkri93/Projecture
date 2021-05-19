@@ -10,7 +10,6 @@ public class Role {
         this.description = description;
         this.price = price;
     }
-
     public int getId() {
         return id;
     }

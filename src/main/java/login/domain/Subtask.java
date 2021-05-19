@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Subtask {
 
-
-
     public int getId() {
         return id;
     }
@@ -43,7 +41,6 @@ public class Subtask {
     public void setTask_name(String task_name) {
         this.task_name = task_name;
     }
-
 
     @Override
     public String toString() {

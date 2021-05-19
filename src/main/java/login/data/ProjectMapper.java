@@ -8,7 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ProjectMapper {
-
+    SubtaskMapper subtaskMapper = new SubtaskMapper();
+    RoleMapper roleMapper = new RoleMapper();
     public void createProject(Project project, User user) {
         try {
             Connection con = DBManager.getConnection();
@@ -29,8 +30,6 @@ public class ProjectMapper {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
-
     }
 
 
@@ -61,7 +60,6 @@ public class ProjectMapper {
     }
 
 
-
     public ArrayList<Project> getProject(User user) {
         ArrayList<Project> projectList = new ArrayList<Project>();
         try {
@@ -69,7 +67,6 @@ public class ProjectMapper {
             String SQL = "SELECT * FROM project WHERE project.user_id=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, user.getId());
-
 
 
             ResultSet rs = ps.executeQuery();
@@ -102,5 +99,15 @@ public class ProjectMapper {
         } catch (SQLException ex) {
         }
         return getProjectNew(project_id);
+    }
+
+    public ArrayList<Project> getProjectList(User user) {
+        ArrayList<Project> projectList = getProject(user);
+        subtaskMapper.setProjectSubtask(projectList);
+
+        roleMapper.getRoles();
+//       Her skal subtaskroles mappes til subtasks
+//        Her skal roles mappes til subtaskroles
+        return projectList;
     }
 }
