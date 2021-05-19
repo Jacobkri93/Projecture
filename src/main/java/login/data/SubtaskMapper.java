@@ -1,13 +1,15 @@
 package login.data;
 
 import login.domain.Project;
+import login.domain.SubTaskRoleViewModel;
 import login.domain.Subtask;
+import login.domain.SubtaskRole;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class SubtaskMapper {
-
+    SubtaskRoleMapper subtaskRoleMapper = new SubtaskRoleMapper();
     public void createSubtask(Subtask subtask, Integer project_id) {
 
         try {
@@ -15,7 +17,7 @@ public class SubtaskMapper {
             String SQL = "INSERT INTO subtask (task_name, project_id) VALUES (?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, subtask.getTask_name());
-            ps.setInt(2,project_id.intValue());
+            ps.setInt(2, project_id);
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -63,6 +65,7 @@ public ArrayList<Subtask> getSubtaskList (int project_id){
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
         return subtasks;
 }
 
@@ -90,6 +93,15 @@ public ArrayList<Subtask> getSubtaskList (int project_id){
             Project project = projects.get(projectIndex);
             int projectId = project.getProjectId();
             ArrayList<Subtask> subtasks = getSubtaskList(projectId);
+
+            for (int subtasksIndex = 0; subtasksIndex < subtasks.size(); subtasksIndex++) {
+                Subtask subtask = subtasks.get(subtasksIndex);
+                int subtaskId = subtask.getId();
+                ArrayList<SubTaskRoleViewModel> subtaskRoles = subtaskRoleMapper.getRolesFromSubtask(subtaskId);
+                subtask.setSubtaskRoleList(subtaskRoles);
+                subtasks.set(subtasksIndex,subtask);
+            }
+
             project.setSubtasklist(subtasks);
             projects.set(projectIndex, project);
         }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import java.util.ArrayList;
 
@@ -37,26 +39,61 @@ public class FrontController {
         return "createProject";
     }
 
+    @GetMapping(value = "/makesubtask/{project_name}")
+    public String createSubtask(WebRequest request){
+        //TODO sikrer korrekt reload af siden
+        String project_name = request.getParameter("project_name");
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        sessionController.setSessionInfo(request, user);
+        return "createProject";
+    }
 
     @PostMapping(value = "/makesubtask")
-    public String createSubtask(WebRequest request) {
+    public String createSubtask(WebRequest request, RedirectAttributes redirectAttributes) {
         String task_name = request.getParameter("task_name");
-        Integer project_id = (Integer) request.getAttribute("project_id", WebRequest.SCOPE_SESSION);
-//        String description = request.getParameter("description");
-        int hours = Integer.valueOf(request.getParameter("hours"));
+        String developer_hours_string = request.getParameter("developer_hours");
+        String senior_developer_hours_string = request.getParameter("senior_developer_hours");
+        String designer_hours_string = request.getParameter("designer_hours");
+
+        int developer_hours = developer_hours_string == null || developer_hours_string.length() < 1 ? 0 : Integer.parseInt(developer_hours_string);
+        int senior_developer_hours = senior_developer_hours_string == null || senior_developer_hours_string.length() < 1 ? 0 : Integer.parseInt(senior_developer_hours_string);
+        int designer_hours = designer_hours_string == null || designer_hours_string.length() < 1 ? 0 : Integer.parseInt(designer_hours_string);
+        int project_id = (Integer) request.getAttribute("project_id", WebRequest.SCOPE_SESSION);
+
         Subtask subtask = this.subtaskController.getSubtask(task_name, project_id);
-//        SubtaskRole subtaskRole = this.subtaskRoleController.getRolesFromSubtask(SubtaskRole);
+
         if (subtask == null) {
             subtask = subtaskController.createSubtask(task_name, project_id);
-//            Kommentar: Her skal vi oprette ny subtask role:
-//            Ex.
-//            new Subtaskrole(hours, subtask.getId(),employees)
+            ArrayList<Role> roles =  roleController.getRoles();
+
+            for(int roleIndex = 0; roleIndex < roles.size(); roleIndex++){
+                Role curRole = roles.get(roleIndex);
+
+                int curHours;
+                switch (curRole.getDescription()) {
+                    case "Developer":
+                        curHours = developer_hours;
+                        break;
+                    case "Senior Developer":
+                        curHours = senior_developer_hours;
+                        break;
+                    case "Designer":
+                        curHours = designer_hours;
+                        break;
+                    default:
+                        curHours = 0;
+                        break;
+                }
+                subtaskRoleController.createSubtaskRole(subtask.getId(), curRole.getId(), curHours);
+            }
         }
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         ArrayList<Subtask> list = subtaskController.getSubtaskList(project_id);
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
         sessionController.setSessionInfoForSubtask(request, user, list, project.getProject_name());
-        return "createProject";
+
+        redirectAttributes.addAttribute("project_name", project.getProject_name());
+        return "redirect:createSubtask";
     }
 
     @ExceptionHandler(Exception.class)
@@ -65,3 +102,4 @@ public class FrontController {
         return "exceptionPage";
     }
 }
+

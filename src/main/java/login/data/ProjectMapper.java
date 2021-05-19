@@ -15,7 +15,7 @@ public class ProjectMapper {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO project (project_name,week_duration, user_id) VALUES (?,?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            // ps.setInt(1, project.getProject_id());
+//             ps.setInt(1, project.getProject_id());
             ps.setString(1, project.getProject_name());
             ps.setInt(2, project.getWeek_duration());
             ps.setInt(3, user.getId());
@@ -104,10 +104,6 @@ public class ProjectMapper {
     public ArrayList<Project> getProjectList(User user) {
         ArrayList<Project> projectList = getProject(user);
         subtaskMapper.setProjectSubtask(projectList);
-
-        roleMapper.getRoles();
-//       Her skal subtaskroles mappes til subtasks
-//        Her skal roles mappes til subtaskroles
         return projectList;
     }
 }

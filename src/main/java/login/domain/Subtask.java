@@ -16,6 +16,16 @@ public class Subtask {
     private String task_name;
     private int project_id;
 
+    public ArrayList<SubTaskRoleViewModel> getSubtaskRoleList() {
+        return subtaskRoleList;
+    }
+
+    public void setSubtaskRoleList(ArrayList<SubTaskRoleViewModel> subtaskRoleList) {
+        this.subtaskRoleList = subtaskRoleList;
+    }
+
+    private ArrayList<SubTaskRoleViewModel> subtaskRoleList;
+
     public Subtask() {
 
     }

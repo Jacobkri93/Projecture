@@ -15,24 +15,28 @@
     <p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
 </div>
 
+<h1>Add a new subtask</h1>
+
 <div>
     <form th:action="@{/makesubtask}" method="POST">
-        <div class="form-input">
+        <div class="form-input text-input">
             <label for="sub_name">Subtask name:</label>
-            <input type="text" id="sub_name" name="task_name" size="20">
+            <input type="text" id="sub_name" name="task_name">
         </div>
-        <div>
-            <select >
-                <input name="employees" id="sub_emp" type="checkbox" th:each="i: ${session.roles}" th:value="${i.id}" th:text="${i.description}">
-                <!--        Mangler hours til hver role-->
 
-                <!--            <option  th:each="i : ${session.roles}" th:value="${i.id}" th:text="${i.description}"-->
-                <!--                    th:selected="${i.description=='Developer'}"></option>-->
-            </select>
+<!--        //Lav størrelse på input box med CSS -->
+
+        <div class="form-input numeric-input">
+            <label for="sub_developer_hours">Developer Hours</label>
+            <input type="number" id="sub_developer_hours" name="developer_hours" >
         </div>
-        <div class="form-input">
-            <label for="sub_hours">Duration in hours:</label>
-            <input type="number" id="sub_hours" name="hours" min="1" max="99">
+        <div class="form-input numeric-input">
+            <label for="sub_senior_developer_hours">Senior Developer Hours</label>
+            <input type="number" id="sub_senior_developer_hours" name="senior_developer_hours" >
+        </div>
+        <div class="form-input numeric-input">
+            <label for="sub_designer_hours">Designer Hours</label>
+            <input type="number" id="sub_designer_hours" name="designer_hours" >
         </div>
         <button type="submit"> add subtask</button>
     </form>
@@ -40,23 +44,30 @@
 
 
     <p>Estimated cost of this task:</p>
-    <table class="table">
-        <thead class="thead">
-        <tr>
-            <th>task name:</th>
-            <th>hours:</th>
-            <th>employee:</th>
-            <th>cost:</th>
+    <div th:each="subtask : ${session.subtasks}">
+        <span th:text="${subtask.task_name}"></span>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="subtask : ${session.subtasks}">
-            <td th:text="${subtask.task_name}"></td>
+        <table class="table">
+            <thead class="thead">
+            <tr>
+                <th>hours:</th>
+                <th>employee:</th>
+                <th>cost:</th>
 
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="subtaskRole : ${subtask.subtaskRoleList}">
+                <td th:text="${subtaskRole.RoleDescription}"></td>
+                <td th:text="${subtaskRole.Hours}"></td>
+                <td th:text="${subtaskRole.FinalPrice}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <form>
+        <input type="button" value="Go back to Project overview" onclick="history.back()">
+    </form>
 </div>
 </body>
 <footer th:replace="fragments/footer.html"></footer>

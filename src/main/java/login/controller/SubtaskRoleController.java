@@ -14,7 +14,7 @@ public class SubtaskRoleController {
         this.subtaskRoleMapper = new SubtaskRoleMapper();
     }
 
-    public ArrayList<Role> getRolesFromSubtask(Subtask subtask){
-        return this.subtaskRoleMapper.getRolesFromSubtask(subtask);
+    public void createSubtaskRole(int subtask_id, int role_id, int hours) {
+        this.subtaskRoleMapper.createSubtaskRole(subtask_id, role_id, hours);
     }
 }
