@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -39,14 +40,24 @@ public class FrontController {
         return "createProject";
     }
 
-    @GetMapping(value = "/makesubtask/{project_name}")
-    public String createSubtask(WebRequest request){
-        //TODO sikrer korrekt reload af siden
-        String project_name = request.getParameter("project_name");
-        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        sessionController.setSessionInfo(request, user);
-        return "createProject";
-    }
+
+//Skal reloade siden ->
+//    @GetMapping(value = "/createSubtask/{project_name}")
+//    public String createSubtask(WebRequest request){
+//        //TODO sikrer korrekt reload af siden
+//        String project_name = request.getParameter("project_name");
+//        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+//        sessionController.setSessionInfo(request, user);
+//        return "createProject";
+//    }
+//    @GetMapping(value = "/createSubtask/{project_name}")
+//    public String Ex(@PathVariable("project_name") String name){
+//        //TODO sikrer korrekt reload af siden
+////        String project_name = request.getParameter("project_name");
+////        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+////        sessionController.setSessionInfo(request, user);
+//        return "createProject";
+//    }
 
     @PostMapping(value = "/makesubtask")
     public String createSubtask(WebRequest request, RedirectAttributes redirectAttributes) {
@@ -55,6 +66,7 @@ public class FrontController {
         String senior_developer_hours_string = request.getParameter("senior_developer_hours");
         String designer_hours_string = request.getParameter("designer_hours");
 
+
         int developer_hours = developer_hours_string == null || developer_hours_string.length() < 1 ? 0 : Integer.parseInt(developer_hours_string);
         int senior_developer_hours = senior_developer_hours_string == null || senior_developer_hours_string.length() < 1 ? 0 : Integer.parseInt(senior_developer_hours_string);
         int designer_hours = designer_hours_string == null || designer_hours_string.length() < 1 ? 0 : Integer.parseInt(designer_hours_string);
@@ -62,6 +74,7 @@ public class FrontController {
 
         Subtask subtask = this.subtaskController.getSubtask(task_name, project_id);
 
+        //Checks if the hours input is 0
         if (subtask == null) {
             subtask = subtaskController.createSubtask(task_name, project_id);
             ArrayList<Role> roles =  roleController.getRoles();
@@ -92,8 +105,9 @@ public class FrontController {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
         sessionController.setSessionInfoForSubtask(request, user, list, project.getProject_name());
 
-        redirectAttributes.addAttribute("project_name", project.getProject_name());
-        return "redirect:createSubtask";
+//        redirectAttributes.addAttribute("project_name", project.getProject_name());
+            return "createSubtask";
+//            return "redirect:/createSubtask";
     }
 
     @ExceptionHandler(Exception.class)
