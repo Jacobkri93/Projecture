@@ -38,7 +38,7 @@ public class UserMapper {
                 user.setId(id);
                 return user;
             } else {
-                throw new LoginSampleException("Could not validate user");
+                throw new LoginSampleException("Could not validate user - Please make sure you have a user registered");
             }
         } catch (SQLException ex) {
             throw new LoginSampleException(ex.getMessage());

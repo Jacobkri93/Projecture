@@ -6,6 +6,8 @@ import login.domain.LoginSampleException;
 import login.domain.Project;
 import login.domain.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
@@ -54,5 +56,10 @@ public class LoginController {
         } else { // If passwords don't match, an exception is thrown
             throw new LoginSampleException("The two passwords did not match");
         }
+    }
+    @ExceptionHandler(Exception.class)
+    public String anotherError(Model model, Exception exception) {
+        model.addAttribute("message", exception.getMessage());
+        return "exceptionPage";
     }
 }

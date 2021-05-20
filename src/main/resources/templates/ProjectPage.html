@@ -43,16 +43,16 @@
 
 
 
-    <p>Estimated cost of this task:</p>
+    <h2>Subtask:</h2>
     <div th:each="subtask : ${session.subtasks}">
         <span th:text="${subtask.task_name}"></span>
 
         <table class="table">
             <thead class="thead">
             <tr>
-                <th>hours:</th>
-                <th>employee:</th>
-                <th>cost:</th>
+                <th>Employee:</th>
+                <th>Hours:</th>
+                <th>Cost:</th>
 
             </tr>
             </thead>

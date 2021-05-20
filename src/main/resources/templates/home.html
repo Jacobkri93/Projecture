@@ -39,9 +39,12 @@
         </thead>
         <tbody class="tbody_home">
         <tr th:each="project : ${session.project_list}">
-            <td th:text="${project.getProject_name()}"></td>
+            <td >
+                <a th:text="${project.getProject_name()}" th:href="|/project/${project.getProjectId()}|"> </a>
+            </td>
             <td th:text="${project.getProjectId()}"></td>
             <td th:text="${project.getWeek_duration()}"></td>
+
 
         </tr>
         </tbody>

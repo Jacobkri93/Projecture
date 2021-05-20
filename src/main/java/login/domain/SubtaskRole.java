@@ -6,14 +6,14 @@ public class SubtaskRole {
     private int id;
     private double hours;
     private int subtask_id;
-    private int taskrole_id;
+    private int role_id;
 
     private ArrayList<Subtask> subtaskList;
 
-    public SubtaskRole(double hours, int subtask_id, int taskrole_id) {
+    public SubtaskRole(double hours, int subtask_id, int role_id) {
         this.hours = hours;
         this.subtask_id = subtask_id;
-        this.taskrole_id = taskrole_id;
+        this.role_id = role_id;
     }
     public SubtaskRole() {
     }
@@ -41,12 +41,12 @@ public class SubtaskRole {
         this.subtask_id = subtask_id;
     }
 
-    public int getTaskrole_id() {
-        return taskrole_id;
+    public int getrole_id() {
+        return role_id;
     }
 
-    public void setTaskrole_id(int taskrole) {
-        this.taskrole_id = taskrole;
+    public void setrole_id(int taskrole) {
+        this.role_id = taskrole;
     }
 
     public void setSubtaskList(ArrayList<Subtask> subtaskList){
