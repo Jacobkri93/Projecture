@@ -329,7 +329,14 @@ tr:nth-child(odd) td {
 .form-input {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 17%;
+    margin-bottom: 8px;
+}
+
+.form-inputhours {
+    display: flex;
+    flex-direction: column;
+    width: 5%;
     margin-bottom: 8px;
 }
 

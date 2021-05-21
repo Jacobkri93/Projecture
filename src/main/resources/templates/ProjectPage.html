@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head.html(pageTitle = 'createProject - Projecture 🎁')">
+<head th:replace="fragments/head.html(pageTitle = 'createProject - Projecture ✔')">
 </head>
 <body>
 <h1>Project Creation page</h1>
@@ -26,15 +26,15 @@
 
 <!--        //Lav størrelse på input box med CSS -->
 
-        <div class="form-input numeric-input">
+        <div class="form-inputhours numeric-input">
             <label for="sub_developer_hours">Developer Hours</label>
             <input type="number" id="sub_developer_hours" name="developer_hours" >
         </div>
-        <div class="form-input numeric-input">
+        <div class="form-inputhours numeric-input">
             <label for="sub_senior_developer_hours">Senior Developer Hours</label>
             <input type="number" id="sub_senior_developer_hours" name="senior_developer_hours" >
         </div>
-        <div class="form-input numeric-input">
+        <div class="form-inputhours numeric-input">
             <label for="sub_designer_hours">Designer Hours</label>
             <input type="number" id="sub_designer_hours" name="designer_hours" >
         </div>
@@ -47,8 +47,8 @@
     <div th:each="subtask : ${session.subtasks}">
         <span th:text="${subtask.task_name}"></span>
 
-        <table class="table">
-            <thead class="thead">
+        <table class="table_home">
+            <thead class="thead_home">
             <tr>
                 <th>Employee:</th>
                 <th>Hours:</th>

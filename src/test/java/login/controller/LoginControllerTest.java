@@ -25,12 +25,12 @@ class LoginControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
-    @Test
-    void loginUser() throws Exception {
-        mockMvc.perform(get("/login"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("login"))
-                .andExpect(model().attribute("user", instanceOf(User.class)));
-
-    }
+//    @Test
+//    void loginUser() throws Exception {
+//        mockMvc.perform(get("/login"))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("login"))
+//                .andExpect(model().attribute("user", instanceOf(User.class)));
+//
+//    }
 }

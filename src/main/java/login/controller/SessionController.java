@@ -41,10 +41,10 @@ public class SessionController {
 //        added roles
 
     }
-    public void setSessionInfoForSubtask(WebRequest request, User user, ArrayList<Subtask> list, String project_name) {
+    public void setSessionInfoForSubtask(WebRequest request, User user, ArrayList<Subtask> list, Project project) {
         //Place subtask info on session
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        request.setAttribute("project", project_name, WebRequest.SCOPE_SESSION);
+        request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
         request.setAttribute("subtasks", list, WebRequest.SCOPE_SESSION);
         request.setAttribute("roles", roleMapper.getRoles(), WebRequest.SCOPE_SESSION);
 //        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);

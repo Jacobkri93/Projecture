@@ -102,8 +102,9 @@ public class FrontController {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         ArrayList<Subtask> list = subtaskController.getSubtaskList(project_id);
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-        sessionController.setSessionInfoForSubtask(request, user, list, project.getProject_name());
-
+        sessionController.setSessionInfoForSubtask(request, user, list, project);
+// vi prøvede at parse en String til et project fra vores get.attribute. Nu gemmer vi et faktisk project i sessionen. ikke bare navnet/ dvs nu er det et object og ikke en string.
+        // linje 105 satte project første gang men anden gang kørte den en string. så fejlen var i setSessioninfoforsubtask
         return "redirect:/project";
     }
 
