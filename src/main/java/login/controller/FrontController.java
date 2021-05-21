@@ -7,6 +7,7 @@ import login.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -41,13 +42,13 @@ public class FrontController {
     }
 
 
-    @GetMapping(value = "/project")
-    public String projectOverview() {
-        return "ProjectPage";
-    }
-
-
-
+//    @GetMapping(value = "/project/{id}")
+//    public String projectOverview(WebRequest request, @PathVariable("id") int id) {
+//        ArrayList<Subtask> subtasks = subtaskController.getSubtaskList(id);
+//        sessionController.setSessionInfoForSubtask(subtasks);
+//
+//        return "ProjectPage";
+//    }
 
 
     @PostMapping(value = "/makesubtask")
