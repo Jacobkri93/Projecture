@@ -15,31 +15,104 @@
     <p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
 </div>
 
-<h1>Add a new subtask</h1>
+
+
+<!--test inputs subtask-->
+<form autocomplete='off' class='createSubtaskForm' th:action="@{/makesubtask}" method="POST">
+    <div class='control'>
+        <h1>
+            Add a new subtask
+        </h1>
+    </div>
+    <div class='control block-cube block-input'>
+        <input name="task_name" placeholder='Enter Subtask name' type='text' required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <div class='control block-cube block-input'>
+        <input type="number" id="sub_developer_hours" name="developer_hours" required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <div class='control block-cube block-input'>
+        <input type="number" id="sub_senior_developer_hours" name="senior_developer_hours" required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <div class='control block-cube block-input'>
+        <input type="number" id="sub_designer_hours" name="designer_hours"  required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <button class='btn block-cube block-cube-hover' type=submit>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='text'>
+            Create Subtask
+        </div>
+    </button>
+</form>
+
+<!--test inputs subtask ends-->
 
 <div>
-    <form th:action="@{/makesubtask}" method="POST">
-        <div class="form-input text-input">
-            <label for="sub_name">Subtask name:</label>
-            <input type="text" id="sub_name" name="task_name">
-        </div>
+<!--    <form th:action="@{/makesubtask}" method="POST">-->
+<!--        <div class="form-input text-input">-->
+<!--            <label for="sub_name">Subtask name:</label>-->
+<!--            <input type="text" id="sub_name" name="task_name">-->
+<!--        </div>-->
 
-<!--        //Lav størrelse på input box med CSS -->
 
-        <div>
-            <label class="form-labeltext" for="sub_developer_hours">Developer Hours</label>
-            <input class="form-inputhours numeric-input" type="number" id="sub_developer_hours" name="developer_hours" >
-        </div>
-        <div>
-            <label class="form-labeltext" for="sub_senior_developer_hours">Senior Developer Hours</label>
-            <input class="form-inputhours numeric-input" type="number" id="sub_senior_developer_hours" name="senior_developer_hours" >
-        </div>
-        <div>
-            <label class="form-labeltext" for="sub_designer_hours">Designer Hours</label>
-            <input class="form-inputhours numeric-input" type="number" id="sub_designer_hours" name="designer_hours" >
-        </div>
-        <button type="submit"> add subtask</button>
-    </form>
+
+<!--        <div>-->
+<!--            <label class="form-labeltext" for="sub_developer_hours">Developer Hours</label>-->
+<!--            <input class="form-inputhours numeric-input" type="number" id="sub_developer_hours" name="developer_hours" >-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label class="form-labeltext" for="sub_senior_developer_hours">Senior Developer Hours</label>-->
+<!--            <input class="form-inputhours numeric-input" type="number" id="sub_senior_developer_hours" name="senior_developer_hours" >-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label class="form-labeltext" for="sub_designer_hours">Designer Hours</label>-->
+<!--            <input class="form-inputhours numeric-input" type="number" id="sub_designer_hours" name="designer_hours" >-->
+<!--        </div>-->
+<!--        <button type="submit"> add subtask</button>-->
+<!--    </form>-->
 
 
 
@@ -66,10 +139,12 @@
             </tbody>
         </table>
     </div>
-    <form>
-        <input type="button" value="Go back to Project overview" onclick="history.back()">
-    </form>
 </div>
+
+<form>
+    <input type="button" value="Go back to Project overview" onclick="history.back()">
+</form>
+
 </body>
 <footer th:replace="fragments/footer.html"></footer>
 </html>

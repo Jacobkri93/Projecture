@@ -8,10 +8,9 @@
 <body>
 
 
-<h1>Logged in as:👨‍💻</h1>
+<h1>Logged in as:</h1>
 
 <p th:text="${session.user.email}" th:unless="${session == null}">[...]</p>
-<!--<p th:text="${session.user.password}" th:unless="${session == null}">[...]</p>-->
 
 <hr style="border-color: Black">
 
@@ -22,7 +21,7 @@
         </h1>
     </div>
     <div class='control block-cube block-input'>
-        <input name="name" type='text' required>
+        <input name="name" type='text' required placeholder="Enter Project Name">
         <div class='bg-top'>
             <div class='bg-inner'></div>
         </div>
@@ -34,7 +33,7 @@
         </div>
     </div>
     <div class='control block-cube block-input'>
-        <input name="week_duration" type='number' required>
+        <input name="week_duration" type='number' required placeholder="Enter duration in weeks">
         <div class='bg-top'>
             <div class='bg-inner'></div>
         </div>
@@ -63,8 +62,6 @@
 
 <!--test input boxes-->
 
-
-
 <!--<form th:action="@{/makeproject}" method="POST">-->
 <!--    <div>-->
 <!--        <label class="form-labeltext" for="name">Name of Project:</label>-->
@@ -76,7 +73,6 @@
 <!--    </div>-->
 <!--    <button type="submit"> Start Project</button>-->
 <!--</form>-->
-
 
 <!--test end-->
 

@@ -198,7 +198,7 @@ h1 {
     opacity: 1;
     visibility: visible;
 }
-/*form inputs frontpage*/
+/*form inputs frontpage ends*/
 
 /*form inputs home*/
 .createProjectForm {
@@ -385,7 +385,193 @@ h1 {
     visibility: visible;
 }
 
-/*form inputs home*/
+/*form inputs home ends*/
+/*form inputs Projectpage*/
+.createSubtaskForm {
+    width: 300px;
+    padding: 64px 15px 24px;
+    margin: unset;
+}
+.createSubtaskForm .control {
+    margin: 0 0 24px;
+}
+.createSubtaskForm .control input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-family: monospace, serif;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+}
+.createSubtaskForm .control input:hover, .createSubtaskForm .control input:focus {
+    outline: none;
+    border: 0;
+}
+.createSubtaskForm .btn {
+    width: 100%;
+    display: block;
+    padding: 14px 16px;
+    background: transparent;
+    outline: none;
+    border: 0;
+    color: #fff;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.block-cube {
+    position: relative;
+}
+.block-cube .bg-top {
+    position: absolute;
+    height: 10px;
+    background: #020024;
+    background: linear-gradient(90deg, #020024 0%, #340979 37%, #00d4ff 94%);
+    bottom: 100%;
+    left: 5px;
+    right: -5px;
+    transform: skew(-45deg, 0);
+    margin: 0;
+}
+.block-cube .bg-top .bg-inner {
+    bottom: 0;
+}
+.block-cube .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #020024;
+    background: linear-gradient(90deg, #020024 0%, #340979 37%, #00d4ff 94%);
+}
+.block-cube .bg-right {
+    position: absolute;
+    background: #020024;
+    background: #00d4ff;
+    top: -5px;
+    z-index: 0;
+    bottom: 5px;
+    width: 10px;
+    left: 100%;
+    transform: skew(0, -45deg);
+}
+.block-cube .bg-right .bg-inner {
+    left: 0;
+}
+.block-cube .bg .bg-inner {
+    transition: all 0.2s ease-in-out;
+}
+.block-cube .bg-inner {
+    background: #212121;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+}
+.block-cube .text {
+    position: relative;
+    z-index: 2;
+}
+.block-cube.block-input input {
+    position: relative;
+    z-index: 2;
+}
+.block-cube.block-input input:focus ~ .bg-right .bg-inner, .block-cube.block-input input:focus ~ .bg-top .bg-inner, .block-cube.block-input input:focus ~ .bg-inner .bg-inner {
+    top: 100%;
+    background: rgba(255, 255, 255, 0.5);
+}
+.block-cube.block-input .bg-top,
+.block-cube.block-input .bg-right,
+.block-cube.block-input .bg {
+    background: rgba(255, 255, 255, 0.5);
+    transition: background 0.2s ease-in-out;
+}
+.block-cube.block-input .bg-right .bg-inner,
+.block-cube.block-input .bg-top .bg-inner {
+    transition: all 0.2s ease-in-out;
+}
+.block-cube.block-input:focus .bg-top,
+.block-cube.block-input:focus .bg-right,
+.block-cube.block-input:focus .bg, .block-cube.block-input:hover .bg-top,
+.block-cube.block-input:hover .bg-right,
+.block-cube.block-input:hover .bg {
+    background: rgba(255, 255, 255, 0.8);
+}
+.block-cube.block-cube-hover:focus .bg .bg-inner, .block-cube.block-cube-hover:hover .bg .bg-inner {
+    top: 100%;
+}
+
+.button-gradient {
+    position: absolute;
+    top: 50%;
+    margin: -30px -80px;
+}
+
+.button-gradient {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 50px;
+    background: #333;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 32px;
+    text-transform: uppercase;
+    color: #fff;
+    transition: color 0.2s ease-in-out;
+}
+.button-gradient span {
+    position: relative;
+    z-index: 2;
+}
+.button-gradient:before, .button-gradient:after {
+    border-radius: 32px;
+    content: "";
+    background: red;
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    top: -2px;
+    bottom: -2px;
+    display: block;
+}
+.button-gradient:before {
+    background: #667eea;
+    background: -moz-linear-gradient(left, #667eea 0%, #764ba2 100%);
+    background: -webkit-linear-gradient(left, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="$gradien-start", endColorstr="$gradien-end",GradientType=1 );
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+    z-index: -1;
+}
+.button-gradient:after {
+    transition: all 0.2s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    background: #3958e4;
+    background: -moz-linear-gradient(left, #3958e4 0%, #5d3b7f 100%);
+    background: -webkit-linear-gradient(left, #3958e4 0%, #5d3b7f 100%);
+    background: linear-gradient(to right, #3958e4 0%, #5d3b7f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="$gradien-hover-start", endColorstr="$gradien-hover-end",GradientType=1 );
+    z-index: 1;
+}
+.button-gradient:hover:before {
+    visibility: hidden;
+    opacity: 0;
+}
+.button-gradient:hover:after {
+    opacity: 1;
+    visibility: visible;
+}
+/*form inputs Projectpage ends*/
+
 
 /*frontpage*/
 .frontpageheader {
@@ -466,6 +652,7 @@ h1 {
     font-size: 14px;
 }
 
+/*Project links*/
 .tproject_name{
     color: #84ee76;
     font-family: monospace, serif;

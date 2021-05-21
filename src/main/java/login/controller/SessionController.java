@@ -50,4 +50,6 @@ public class SessionController {
 
 //        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
     }
+
+
 }

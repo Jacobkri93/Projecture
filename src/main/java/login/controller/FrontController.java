@@ -45,10 +45,15 @@ public class FrontController {
 //    @GetMapping(value = "/project/{id}")
 //    public String projectOverview(WebRequest request, @PathVariable("id") int id) {
 //        ArrayList<Subtask> subtasks = subtaskController.getSubtaskList(id);
-//        sessionController.setSessionInfoForSubtask(subtasks);
+////        sessionController.setSessionInfoForSubtask(subtasks);
 //
 //        return "ProjectPage";
 //    }
+
+    @GetMapping(value = "/project")
+    public String projectOverview() {
+        return "ProjectPage";
+    }
 
 
     @PostMapping(value = "/makesubtask")
