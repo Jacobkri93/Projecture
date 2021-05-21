@@ -8,32 +8,85 @@
 <body>
 
 
-<h1>You're logged in as:</h1>
+<h1>Logged in as:👨‍💻</h1>
 
 <p th:text="${session.user.email}" th:unless="${session == null}">[...]</p>
 <!--<p th:text="${session.user.password}" th:unless="${session == null}">[...]</p>-->
 
 <hr style="border-color: Black">
-<h1>Create a new Project</h1>
-<div>
-    <form th:action="@{/makeproject}" method="POST">
-        <div>
-            <label class="form-labeltext" for="name">Name of Project:</label>
-            <input class="form-input text-input" type="text" id="name" name="name" required placeholder="Write name here">
+
+<form autocomplete='off' class='createProjectForm' th:action="@{/makeproject}" method="POST">
+    <div class='control'>
+        <h1>
+            Create a new project
+        </h1>
+    </div>
+    <div class='control block-cube block-input'>
+        <input name="name" type='text' required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
         </div>
-        <div>
-            <label class="form-labeltext" for="name">Week duration:</label>
-            <input class="form-inputhours numeric-input" type="number" id="week" name="week_duration" required >
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
         </div>
-        <button type="submit"> Start Project</button>
-    </form>
-</div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <div class='control block-cube block-input'>
+        <input name="week_duration" type='number' required>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+    </div>
+    <button class='btn block-cube block-cube-hover' type=submit>
+        <div class='bg-top'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg-right'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='bg'>
+            <div class='bg-inner'></div>
+        </div>
+        <div class='text'>
+            Create project
+        </div>
+    </button>
+</form>
+
+<!--test input boxes-->
+
+
+
+<!--<form th:action="@{/makeproject}" method="POST">-->
+<!--    <div>-->
+<!--        <label class="form-labeltext" for="name">Name of Project:</label>-->
+<!--        <input class="form-input text-input" type="text" id="name" name="name" required placeholder="Write name here">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label class="form-labeltext" for="name">Week duration:</label>-->
+<!--        <input class="form-inputhours numeric-input" type="number" id="week" name="week_duration" required>-->
+<!--    </div>-->
+<!--    <button type="submit"> Start Project</button>-->
+<!--</form>-->
+
+
+<!--test end-->
+
+
 <div class="span-2">
     <p class="no margin"> Ongoing Projects:</p>
     <table class="table_home">
         <thead class="thead_home">
         <tr>
-            <th>Name:</th>
+            <th> Name:</th>
             <th>Project ID:</th>
             <th>Week Duration:</th>
 
@@ -41,8 +94,9 @@
         </thead>
         <tbody class="tbody_home">
         <tr th:each="project : ${session.project_list}">
-            <td >
-                <a th:text="${project.getProject_name()}" th:href="|/project/${project.getProjectId()}|"> </a>
+            <td>
+                <a class="tproject_name" th:text="${project.getProject_name()}"
+                   th:href="|/project/${project.getProjectId()}|"> </a>
             </td>
             <td th:text="${project.getProjectId()}"></td>
             <td th:text="${project.getWeek_duration()}"></td>
