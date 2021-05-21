@@ -10,12 +10,12 @@
     </th>
     <p th:text="${session.name}" th:unless="${session == null}">[...]</p>
     <th>
-        Week Duration:
+        Estimated weeks duration:
     </th>
     <p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
 </div>
 
-
+<hr>
 
 <!--test inputs subtask-->
 <form autocomplete='off' class='createSubtaskForm' th:action="@{/makesubtask}" method="POST">
@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class='control block-cube block-input'>
-        <input type="number" id="sub_developer_hours" name="developer_hours" required>
+        <input type="number" placeholder="Senior Developer hours:" name="senior_developer_hours" required>
         <div class='bg-top'>
             <div class='bg-inner'></div>
         </div>
@@ -49,7 +49,7 @@
         </div>
     </div>
     <div class='control block-cube block-input'>
-        <input type="number" id="sub_senior_developer_hours" name="senior_developer_hours" required>
+        <input type="number" placeholder="Developer hours:" name="developer_hours" required>
         <div class='bg-top'>
             <div class='bg-inner'></div>
         </div>
@@ -61,7 +61,7 @@
         </div>
     </div>
     <div class='control block-cube block-input'>
-        <input type="number" id="sub_designer_hours" name="designer_hours"  required>
+        <input type="number" placeholder="Designer hours:" name="designer_hours" required>
         <div class='bg-top'>
             <div class='bg-inner'></div>
         </div>
@@ -91,29 +91,6 @@
 <!--test inputs subtask ends-->
 
 <div>
-<!--    <form th:action="@{/makesubtask}" method="POST">-->
-<!--        <div class="form-input text-input">-->
-<!--            <label for="sub_name">Subtask name:</label>-->
-<!--            <input type="text" id="sub_name" name="task_name">-->
-<!--        </div>-->
-
-
-
-<!--        <div>-->
-<!--            <label class="form-labeltext" for="sub_developer_hours">Developer Hours</label>-->
-<!--            <input class="form-inputhours numeric-input" type="number" id="sub_developer_hours" name="developer_hours" >-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <label class="form-labeltext" for="sub_senior_developer_hours">Senior Developer Hours</label>-->
-<!--            <input class="form-inputhours numeric-input" type="number" id="sub_senior_developer_hours" name="senior_developer_hours" >-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <label class="form-labeltext" for="sub_designer_hours">Designer Hours</label>-->
-<!--            <input class="form-inputhours numeric-input" type="number" id="sub_designer_hours" name="designer_hours" >-->
-<!--        </div>-->
-<!--        <button type="submit"> add subtask</button>-->
-<!--    </form>-->
-
 
 
     <h2>Subtasks:</h2>
@@ -141,8 +118,9 @@
     </div>
 </div>
 
+
 <form>
-    <input type="button" value="Go back to Project overview" onclick="history.back()">
+    <input type="button" value="Go back!" onclick="window.history.back(-1)">
 </form>
 
 </body>

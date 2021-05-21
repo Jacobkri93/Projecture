@@ -9,6 +9,7 @@ body {
     letter-spacing: 0.05em;
 }
 
+
 h1 {
     font-size: 23px;
 }
@@ -654,15 +655,20 @@ h1 {
 
 /*Project links*/
 .tproject_name{
-    color: #84ee76;
+    color: #60ff67;
     font-family: monospace, serif;
     letter-spacing: 0.05em;
     text-decoration: none;
     text-transform: uppercase;
-    font-weight: bolder;
-
-
+    font-style: oblique;
 }
+.tproject_name:hover{
+    color: #8e9cee;
+     text-decoration: underline;
+}
+
+
+
 
 .hr {
     /*border-color: black;*/

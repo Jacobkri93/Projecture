@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head.html(pageTitle = 'Homepage - Projecture ✔')">
-</head>
+<head th:replace="fragments/head.html(pageTitle = 'Homepage - Projecture')">
+
+<!--</head>-->
 <header th:replace="fragments/header.html">
 </header>
 
-<body>
+<body class="body-home">
+
 
 
 <h1>Logged in as:</h1>
@@ -62,18 +64,6 @@
 
 <!--test input boxes-->
 
-<!--<form th:action="@{/makeproject}" method="POST">-->
-<!--    <div>-->
-<!--        <label class="form-labeltext" for="name">Name of Project:</label>-->
-<!--        <input class="form-input text-input" type="text" id="name" name="name" required placeholder="Write name here">-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label class="form-labeltext" for="name">Week duration:</label>-->
-<!--        <input class="form-inputhours numeric-input" type="number" id="week" name="week_duration" required>-->
-<!--    </div>-->
-<!--    <button type="submit"> Start Project</button>-->
-<!--</form>-->
-
 <!--test end-->
 
 
@@ -84,7 +74,7 @@
         <tr>
             <th> Name:</th>
             <th>Project ID:</th>
-            <th>Week Duration:</th>
+            <th>Estimated weeks duration:</th>
 
         </tr>
         </thead>

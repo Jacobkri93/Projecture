@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head> Title = 'Error - Projecture ✔'
+<head Title = 'Error - Projecture'>
     <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -8,8 +8,9 @@
 <h1>An Error Occured! ლ(ಠ益ಠლ) </h1>
 <p><span th:text="${message}"></span></p>
 <form>
-    <input type="button" value="Go back!" onclick="history.back()">
+    <input type="button" value="Go back!" onclick="window.history.back(-1)">
 </form>
+
 </body>
 <footer></footer>
 </html>
