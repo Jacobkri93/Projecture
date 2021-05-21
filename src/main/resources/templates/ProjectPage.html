@@ -26,25 +26,26 @@
 
 <!--        //Lav størrelse på input box med CSS -->
 
-        <div class="form-inputhours numeric-input">
-            <label for="sub_developer_hours">Developer Hours</label>
-            <input type="number" id="sub_developer_hours" name="developer_hours" >
+        <div>
+            <label class="form-labeltext" for="sub_developer_hours">Developer Hours</label>
+            <input class="form-inputhours numeric-input" type="number" id="sub_developer_hours" name="developer_hours" >
         </div>
-        <div class="form-inputhours numeric-input">
-            <label for="sub_senior_developer_hours">Senior Developer Hours</label>
-            <input type="number" id="sub_senior_developer_hours" name="senior_developer_hours" >
+        <div>
+            <label class="form-labeltext" for="sub_senior_developer_hours">Senior Developer Hours</label>
+            <input class="form-inputhours numeric-input" type="number" id="sub_senior_developer_hours" name="senior_developer_hours" >
         </div>
-        <div class="form-inputhours numeric-input">
-            <label for="sub_designer_hours">Designer Hours</label>
-            <input type="number" id="sub_designer_hours" name="designer_hours" >
+        <div>
+            <label class="form-labeltext" for="sub_designer_hours">Designer Hours</label>
+            <input class="form-inputhours numeric-input" type="number" id="sub_designer_hours" name="designer_hours" >
         </div>
         <button type="submit"> add subtask</button>
     </form>
 
 
 
-    <h2>Subtask:</h2>
+    <h2>Subtasks:</h2>
     <div th:each="subtask : ${session.subtasks}">
+        <hr>
         <span th:text="${subtask.task_name}"></span>
 
         <table class="table_home">
