@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class SubtaskMapper {
     SubtaskRoleMapper subtaskRoleMapper = new SubtaskRoleMapper();
+
     public void createSubtask(Subtask subtask, Integer project_id) {
 
         try {
@@ -47,8 +48,8 @@ public class SubtaskMapper {
 //    }
 //    return null;
 
-//}
-public ArrayList<Subtask> getSubtaskList (int project_id){
+    //}
+    public ArrayList<Subtask> getSubtaskList(int project_id) {
         ArrayList<Subtask> subtasks = new ArrayList();
         try {
             Connection con = DBManager.getConnection();
@@ -56,10 +57,10 @@ public ArrayList<Subtask> getSubtaskList (int project_id){
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, project_id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("subtask_id");
                 String task_name = rs.getString("task_name");
-                subtasks.add(new Subtask(id,task_name));
+                subtasks.add(new Subtask(id, task_name));
             }
 
         } catch (SQLException throwables) {
@@ -67,7 +68,7 @@ public ArrayList<Subtask> getSubtaskList (int project_id){
         }
 
         return subtasks;
-}
+    }
 
     public Subtask getSubtask(String task_name, int project_id) {
         try {
@@ -99,7 +100,7 @@ public ArrayList<Subtask> getSubtaskList (int project_id){
                 int subtaskId = subtask.getId();
                 ArrayList<SubTaskRoleViewModel> subtaskRoles = subtaskRoleMapper.getRolesFromSubtask(subtaskId);
                 subtask.setSubtaskRoleList(subtaskRoles);
-                subtasks.set(subtasksIndex,subtask);
+                subtasks.set(subtasksIndex, subtask);
             }
 
             project.setSubtasklist(subtasks);

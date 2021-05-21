@@ -33,6 +33,7 @@ public class FrontController {
 
     @PostMapping(value = "/makeproject")
     public String createProject(WebRequest request) {
+        sessionController.clearSession(request);
         String project_name = request.getParameter("name");
         int week_duration = Integer.valueOf(request.getParameter("week_duration"));
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
@@ -50,8 +51,14 @@ public class FrontController {
 //        return "ProjectPage";
 //    }
 
-    @GetMapping(value = "/project")
-    public String projectOverview() {
+    @GetMapping(value = "/project/{id}")
+    public String projectOverview(@PathVariable("id") int project_id,WebRequest request) {
+        sessionController.setSessionInfoFromHome(request,project_id);
+        return "ProjectPage";
+    }
+    @GetMapping("/project")
+    public String projectPage(WebRequest request){
+
         return "ProjectPage";
     }
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class ProjectMapper {
     SubtaskMapper subtaskMapper = new SubtaskMapper();
     RoleMapper roleMapper = new RoleMapper();
+
     public void createProject(Project project, User user) {
         try {
             Connection con = DBManager.getConnection();
@@ -37,7 +38,7 @@ public class ProjectMapper {
         Project project = new Project();
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM project WHERE user_id=?";
+            String SQL = "SELECT * FROM project WHERE project_id=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, project_id);
 
