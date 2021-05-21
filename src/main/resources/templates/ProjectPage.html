@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head.html(pageTitle = 'createProject - Projecture ✔')">
 </head>
-<body>
+
+<div class="bgHomeProjectPage">
 <h1>Project Creation page</h1>
 <div>
     <th>
@@ -21,7 +22,7 @@
 <form autocomplete='off' class='createSubtaskForm' th:action="@{/makesubtask}" method="POST">
     <div class='control'>
         <h1>
-            Add a new subtask
+            Add Subtask
         </h1>
     </div>
     <div class='control block-cube block-input'>
@@ -37,7 +38,7 @@
         </div>
     </div>
     <div class='control block-cube block-input'>
-        <input type="number" placeholder="Senior Developer hours:" name="senior_developer_hours" required>
+        <input type="number" placeholder="Senior Developer hours:" name="senior_developer_hours">
         <div class='bg-top'>
             <div class='bg-inner'></div>
         </div>
@@ -49,7 +50,7 @@
         </div>
     </div>
     <div class='control block-cube block-input'>
-        <input type="number" placeholder="Developer hours:" name="developer_hours" required>
+        <input type="number" placeholder="Developer hours:" name="developer_hours">
         <div class='bg-top'>
             <div class='bg-inner'></div>
         </div>
@@ -61,7 +62,7 @@
         </div>
     </div>
     <div class='control block-cube block-input'>
-        <input type="number" placeholder="Designer hours:" name="designer_hours" required>
+        <input type="number" placeholder="Designer hours:" name="designer_hours" >
         <div class='bg-top'>
             <div class='bg-inner'></div>
         </div>
@@ -92,10 +93,10 @@
 
 <div>
 
-
+    <hr>
     <h2>Subtasks:</h2>
     <div th:each="subtask : ${session.subtasks}">
-        <hr>
+
         <span th:text="${subtask.task_name}"></span>
 
         <table class="table_home">
@@ -123,6 +124,6 @@
     <input type="button" value="Go back!" onclick="window.history.back(-1)">
 </form>
 
-</body>
+</div>
 <footer th:replace="fragments/footer.html"></footer>
 </html>

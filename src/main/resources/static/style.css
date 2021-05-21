@@ -7,12 +7,48 @@ body {
     color: #fff;
     font-family: monospace, serif;
     letter-spacing: 0.05em;
+
+}
+.bgHomeProjectPage {
+
+    background:url("images/26293.jpg")#212121;
+    no-repeat: center center fixed;
+    color: #fff;
+    font-family: monospace, serif;
+    letter-spacing: 0.05em;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    border-radius: 6px;
+    margin: 50px;
+
+}
+h1{
+    font-size: 18px;
 }
 
-
-h1 {
-    font-size: 23px;
+hr {
+    height: 2px;
+    border-style: solid;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 20px;
+    width: 98%;
+    background: #ddd;
 }
+
+.projectformbox {
+    background-color: #212121;
+    width: 305px;
+    margin: 25px;
+    border-radius: 6px;
+}
+.currentUser{
+    margin: 25px;
+    padding: 10px;
+}
+
 
 /*form inputs frontpage*/
 .loginregisterform {
@@ -204,7 +240,7 @@ h1 {
 /*form inputs home*/
 .createProjectForm {
     width: 300px;
-    padding: 64px 15px 24px;
+    padding: 5px 15px 24px;
     margin: unset;
 }
 .createProjectForm .control {
@@ -668,15 +704,9 @@ h1 {
 }
 
 
-
-
-.hr {
-    /*border-color: black;*/
-    width: 50%;
-}
-
 .span-2 {
     grid-column: span 2 / span 2;
+    margin: 25px;
 }
 
 .no-margin {
@@ -793,20 +823,23 @@ tr:nth-child(odd) td {
 .item{
     flex-basis: 0;
     flex-grow: 1;
+    padding: 50px;
 }
 
 /* HEADER */
 
 /* Style the header with a grey background and some padding */
-.header {
+.headerfragment {
+    background: url("images/bgimage.jpg") no-repeat;
     overflow: hidden;
     background-color: #212121;
     padding: 20px 10px;
+    border-radius: 6px;
 
 }
 
 /* Style the header links */
-.header a {
+.headerfragment a {
     float: left;
     color: black;
     text-align: center;
@@ -814,39 +847,53 @@ tr:nth-child(odd) td {
     text-decoration: none;
     font-size: 18px;
     line-height: 25px;
-    border-radius: 4px;
+    /*border-radius: 4px;*/
 }
+
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-.header a.logo {
+.headerfragment a.logo {
+    /*background: url("images/icon64.jpg") right center no-repeat;*/
+    width: 254px;
+    height: 144px;
+    background: url("images/projecture-header.png") center center no-repeat;
     font-size: 25px;
     font-weight: bold;
-    background-color: #ddd;
-    color: black;
+    background-color: #464646;
+    color: #eeeeee;
+    border-radius: 20px;
 }
-
- /*Change the background color on mouse-over*/
-/*.header a:hover {*/
-/*    background-color: red;*/
-/*    color: red;*/
-/*}*/
-
+.headerfragment a.active {
+    float: left;
+    color: #60ff67;
+    text-align: center;
+    font-weight: bold;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+    background: #010B26;
+    margin: 2px;
+}
  /*Style the active/current link*/
-.header a.active:hover {
+.headerfragment a.active:hover {
     background-color: #212121;
     color: #ddd;
+    border-radius: 4px;
 }
 
 
 /* Float the link section to the right */
 .header-right {
     float: right;
+    margin: 40px;
 
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (max-width: 500px) {
-    .header a {
+    .headerfragment a {
         float: none;
         display: block;
         text-align: left;

@@ -6,16 +6,15 @@
 <header th:replace="fragments/header.html">
 </header>
 
-<body class="body-home">
+<div class="bgHomeProjectPage">
 
 
 
-<h1>Logged in as:</h1>
+<h1 class="currentUser">Logged in as:</h1>
 
-<p th:text="${session.user.email}" th:unless="${session == null}">[...]</p>
-
-<hr style="border-color: Black">
-
+<p class="currentUser" th:text="${session.user.email}" th:unless="${session == null}">[...]</p>
+    <hr class="seperationBar">
+<div class="projectformbox">
 <form autocomplete='off' class='createProjectForm' th:action="@{/makeproject}" method="POST">
     <div class='control'>
         <h1>
@@ -61,6 +60,7 @@
         </div>
     </button>
 </form>
+</div>
 
 <!--test input boxes-->
 
@@ -68,7 +68,7 @@
 
 
 <div class="span-2">
-    <p class="no margin"> Ongoing Projects:</p>
+    <h2 class="no margin"> Ongoing Projects:</h2>
     <table class="table_home">
         <thead class="thead_home">
         <tr>
@@ -93,6 +93,7 @@
     </table>
 </div>
 
-</body>
+</div>
+<body></body>
 <footer th:replace="fragments/footer.html"></footer>
 </html>
