@@ -5,6 +5,7 @@ import login.domain.Role;
 import login.domain.Subtask;
 import login.domain.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -42,30 +43,21 @@ public class FrontController {
 
     @GetMapping(value = "/project")
     public String projectOverview() {
-
         return "ProjectPage";
     }
 
 
-//Skal reloade siden ->
-//    @GetMapping(value = "/createSubtask/{id}")
-//    public String createSubtask(WebRequest request){
-//        //TODO sikrer korrekt reload af siden
-//        String id = request.getParameter("id");
-//        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-//        sessionController.setSessionInfo(request, user);
-//        return "createProject";
-//    }
+
 
 
     @PostMapping(value = "/makesubtask")
-    public String createSubtask(WebRequest request, RedirectAttributes redirectAttributes) {
+    public String createSubtask(WebRequest request, Model model) {
         String task_name = request.getParameter("task_name");
         String developer_hours_string = request.getParameter("developer_hours");
         String senior_developer_hours_string = request.getParameter("senior_developer_hours");
         String designer_hours_string = request.getParameter("designer_hours");
 
-        //Checks if the hours has input, otherwise set it to 0
+
         int developer_hours = developer_hours_string == null || developer_hours_string.length() < 1 ? 0 : Integer.parseInt(developer_hours_string);
         int senior_developer_hours = senior_developer_hours_string == null || senior_developer_hours_string.length() < 1 ? 0 : Integer.parseInt(senior_developer_hours_string);
         int designer_hours = designer_hours_string == null || designer_hours_string.length() < 1 ? 0 : Integer.parseInt(designer_hours_string);
@@ -108,10 +100,6 @@ public class FrontController {
         return "redirect:/project";
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public String anotherError(Model model, Exception exception) {
-//        model.addAttribute("message", exception.getMessage());
-//        return "exceptionPage";
-//    }
+
 }
 

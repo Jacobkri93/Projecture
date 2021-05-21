@@ -16,7 +16,6 @@ public class SubtaskRoleMapper {
             ps.setInt(1, subtask_id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                //TODO Tilpas til nyt select
                 int hours = rs.getInt("hours");
                 String description = rs.getString("description");
                 double price = rs.getDouble("price");

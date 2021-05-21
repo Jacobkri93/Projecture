@@ -4,7 +4,7 @@
 
 body {
     background-color: #212121;
-    color: #fff;
+    color: #6aff86;
     font-family: monospace, serif;
     letter-spacing: 0.05em;
 }
@@ -428,6 +428,7 @@ tr:nth-child(odd) td {
     overflow: hidden;
     background-color: #212121;
     padding: 20px 10px;
+
 }
 
 /* Style the header links */
