@@ -47,6 +47,7 @@ public class SessionController {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
         request.setAttribute("subtasks", list, WebRequest.SCOPE_SESSION);
         request.setAttribute("roles", roleMapper.getRoles(), WebRequest.SCOPE_SESSION);
+
 //        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
     }
 }

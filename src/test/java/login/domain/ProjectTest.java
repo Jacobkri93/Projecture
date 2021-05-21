@@ -40,4 +40,10 @@ class ProjectTest {
         assertEquals(10, p.getWeek_duration());
     }
 
+    // test om et project bliver lagt i vores database. start med use case og så bryd den ned i testcases.
+    // getProject ? en vigtig use case. test mysql ?script i klassen.
+
+//    @Test
+//    void
+
 }
