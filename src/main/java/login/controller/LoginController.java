@@ -34,7 +34,7 @@ public class LoginController {
 
         // delegate work + data to login controller
         User user = userMapper.login(email, pwd);
-        ArrayList<Project> list = projectMapper.getProject(user);
+//        ArrayList<Project> list = projectMapper.getProject(user);  // den her bruger vi ikke til noget?
         sessionController.setSessionInfo(request, user);
         return "home";
     }

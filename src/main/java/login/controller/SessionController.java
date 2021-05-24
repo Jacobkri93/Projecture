@@ -4,13 +4,12 @@ import login.data.ProjectMapper;
 import login.data.RoleMapper;
 import login.data.SubtaskMapper;
 import login.data.SubtaskRoleMapper;
-import login.domain.Project;
-import login.domain.Subtask;
-import login.domain.SubtaskRole;
-import login.domain.User;
+import login.domain.*;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.ArrayList;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SessionController {
     private ProjectMapper projectMapper;
@@ -28,7 +27,9 @@ public class SessionController {
 
     public void setSessionInfo(WebRequest request, User user) {
         // Place user info on session
-        request.setAttribute("project_list", projectMapper.getProject(user),WebRequest.SCOPE_SESSION);
+        ArrayList<Project> list = projectMapper.getProject(user);
+        Collections.sort(list, (o1, o2) -> o1.getProject_name().compareTo(o2.getProject_name()));
+        request.setAttribute("project_list", list,WebRequest.SCOPE_SESSION);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("role", user, WebRequest.SCOPE_SESSION);
         //laver med crof
@@ -67,7 +68,22 @@ public class SessionController {
         for (int i = 0; i<subtask.size();i++){
             subtask.get(i).setSubtaskRoleList(subtaskRoleMapper.getRolesFromSubtask(subtask.get(i).getId()));
         }
+        request.setAttribute("calculatedPrice",calculatePrice(subtask),WebRequest.SCOPE_SESSION);
         request.setAttribute("subtasks",subtask,WebRequest.SCOPE_SESSION);
+    }
+
+    // Vi har summeret price * hours fra vores project. Vi kommer ind med en subtask og vi looper over rolelisten fra en subtask.
+    public double calculatePrice(ArrayList<Subtask> subtasks) {
+        double sum = 0;
+      for (Subtask x: subtasks) {
+         ArrayList<SubTaskRoleViewModel> vm =  x.getSubtaskRoleList();
+
+        for (SubTaskRoleViewModel y: vm) {
+            sum += y.getPrice() * y.getHours();
+         }
+      }
+
+        return sum;
     }
     public void clearSession(WebRequest request){
         request.removeAttribute("project",WebRequest.SCOPE_SESSION);
