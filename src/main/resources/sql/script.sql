@@ -8,14 +8,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema useradmin
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema useradmin
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `useradmin` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
--- -----------------------------------------------------
 -- Schema user_admin
 -- -----------------------------------------------------
 
@@ -23,61 +15,6 @@ CREATE SCHEMA IF NOT EXISTS `useradmin` DEFAULT CHARACTER SET utf8mb4 COLLATE ut
 -- Schema user_admin
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `user_admin` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `useradmin` ;
-
--- -----------------------------------------------------
--- Table `useradmin`.`item`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `useradmin`.`item` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `price` DECIMAL(8,2) NULL DEFAULT NULL,
-  `description` VARCHAR(120) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 10
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `useradmin`.`users`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `useradmin`.`users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(90) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `role` VARCHAR(20) NOT NULL DEFAULT 'customer',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 23
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `useradmin`.`wishlist`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `useradmin`.`wishlist` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NULL DEFAULT NULL,
-  `item_id` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `user_id_idx` (`user_id` ASC) VISIBLE,
-  INDEX `FK_item_id_idx` (`item_id` ASC) VISIBLE,
-  CONSTRAINT `FK_item_id`
-    FOREIGN KEY (`item_id`)
-    REFERENCES `useradmin`.`item` (`id`),
-  CONSTRAINT `FK_user_id`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `useradmin`.`users` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 15
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
 USE `user_admin` ;
 
 -- -----------------------------------------------------
@@ -90,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`user` (
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 17
+AUTO_INCREMENT = 18
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -109,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`project` (
     FOREIGN KEY (`user_id`)
     REFERENCES `user_admin`.`user` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 35
+AUTO_INCREMENT = 99
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -142,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`subtask` (
     FOREIGN KEY (`project_id`)
     REFERENCES `user_admin`.`project` (`project_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 8
+AUTO_INCREMENT = 49
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -154,17 +91,18 @@ CREATE TABLE IF NOT EXISTS `user_admin`.`subtaskrole` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `hours` DECIMAL(6,2) NOT NULL,
   `subtask_id` INT NOT NULL,
-  `taskrole_id` INT NOT NULL,
+  `role_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `subtaskRole_idx` (`subtask_id` ASC) VISIBLE,
-  INDEX `taskrole_idx` (`taskrole_id` ASC) VISIBLE,
+  INDEX `taskrole_idx` (`role_id` ASC) VISIBLE,
+  CONSTRAINT `role_id`
+    FOREIGN KEY (`role_id`)
+    REFERENCES `user_admin`.`role` (`id`),
   CONSTRAINT `subtask`
     FOREIGN KEY (`subtask_id`)
-    REFERENCES `user_admin`.`subtask` (`subtask_id`),
-  CONSTRAINT `taskrole_id`
-    FOREIGN KEY (`taskrole_id`)
-    REFERENCES `user_admin`.`role` (`id`))
+    REFERENCES `user_admin`.`subtask` (`subtask_id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 113
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
