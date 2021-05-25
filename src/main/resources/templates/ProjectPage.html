@@ -4,131 +4,131 @@
 </head>
 
 <div class="bgHomeProjectPage">
-<h1>Project Creation page</h1>
-<div>
-    <th>
-        Project Name:
-    </th>
-    <p th:text="${session.name}" th:unless="${session == null}">[...]</p>
-    <th>
-        Estimated weeks duration:
-    </th>
-    <p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
-</div>
-
-<hr>
-
-<!--test inputs subtask-->
-<form autocomplete='off' class='createSubtaskForm' th:action="@{/makesubtask}" method="POST">
-    <div class='control'>
-        <h1>
-            Add Subtask
-        </h1>
+    <h1>Project Creation page</h1>
+    <div>
+        <th>
+            Project Name:
+        </th>
+        <p th:text="${session.name}" th:unless="${session == null}">[...]</p>
+        <th>
+            Estimated weeks duration:
+        </th>
+        <p th:text="${session.week_duration}" th:unless="${session == null}">[...]</p>
     </div>
-    <div class='control block-cube block-input'>
-        <input name="task_name" placeholder='Enter Subtask name' type='text' required>
-        <div class='bg-top'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg-right'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg'>
-            <div class='bg-inner'></div>
-        </div>
-    </div>
-    <div class='control block-cube block-input'>
-        <input type="number" placeholder="Senior Developer hours:" name="senior_developer_hours">
-        <div class='bg-top'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg-right'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg'>
-            <div class='bg-inner'></div>
-        </div>
-    </div>
-    <div class='control block-cube block-input'>
-        <input type="number" placeholder="Developer hours:" name="developer_hours">
-        <div class='bg-top'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg-right'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg'>
-            <div class='bg-inner'></div>
-        </div>
-    </div>
-    <div class='control block-cube block-input'>
-        <input type="number" placeholder="Designer hours:" name="designer_hours" >
-        <div class='bg-top'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg-right'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg'>
-            <div class='bg-inner'></div>
-        </div>
-    </div>
-    <button class='btn block-cube block-cube-hover' type=submit>
-        <div class='bg-top'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg-right'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='bg'>
-            <div class='bg-inner'></div>
-        </div>
-        <div class='text'>
-            Create Subtask
-        </div>
-    </button>
-</form>
-
-<!--test inputs subtask ends-->
-
-<div>
 
     <hr>
-    <h2>Subtasks:</h2>
-    <div th:each="subtask : ${session.subtasks}">
 
-        <span th:text="${subtask.task_name}"></span>
+    <!--test inputs subtask-->
+    <form autocomplete='off' class='createSubtaskForm' th:action="@{/makesubtask}" method="POST">
+        <div class='control'>
+            <h1>
+                Add Subtask
+            </h1>
+        </div>
+        <div class='control block-cube block-input'>
+            <input name="task_name" placeholder='Enter Subtask name' type='text' required>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <div class='control block-cube block-input'>
+            <input type="number" placeholder="Senior Developer hours:" name="senior_developer_hours">
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <div class='control block-cube block-input'>
+            <input type="number" placeholder="Developer hours:" name="developer_hours">
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <div class='control block-cube block-input'>
+            <input type="number" placeholder="Designer hours:" name="designer_hours">
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+        </div>
+        <button class='btn block-cube block-cube-hover' type=submit>
+            <div class='bg-top'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg-right'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='bg'>
+                <div class='bg-inner'></div>
+            </div>
+            <div class='text'>
+                Create Subtask
+            </div>
+        </button>
+    </form>
 
-        <table class="table_home">
-            <thead class="thead_home">
-            <tr>
-                <th>Employee:</th>
-                <th>Hours:</th>
-                <th>Cost:</th>
+    <!--test inputs subtask ends-->
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="subtaskRole : ${subtask.subtaskRoleList}">
-                <td th:text="${subtaskRole.RoleDescription}"></td>
-                <td th:text="${subtaskRole.Hours}"></td>
-                <td th:text="${subtaskRole.FinalPrice}"></td>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            <h2>
-                Calclulated Price:
-            </h2>
-            <p th:text="${session.calculatedPrice}"></p>
+    <div>
+
+        <hr>
+        <h2>Subtasks:</h2>
+        <div th:each="subtask : ${session.subtasks}">
+
+            <span th:text="${subtask.task_name}"></span>
+
+            <table class="table_home">
+                <thead class="thead_home">
+                <tr>
+                    <th>Employee:</th>
+                    <th>Hours:</th>
+                    <th>Cost:</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="subtaskRole : ${subtask.subtaskRoleList}">
+                    <td th:text="${subtaskRole.RoleDescription}"></td>
+                    <td th:text="${subtaskRole.Hours}"></td>
+                    <td th:text="${subtaskRole.FinalPrice}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
+    <div>
+        <h2>
+            Calculated Price:
+        </h2>
+        <p th:text="${session.calculatedPrice}"></p>
+    </div>
 
 
-<form>
-    <input type="button" value="Go back!" onclick="window.history.back(-1)">
-</form>
+    <form>
+        <input type="button" value="Go back!" onclick="window.history.back(-1)">
+    </form>
 
 </div>
 <footer th:replace="fragments/footer.html"></footer>
