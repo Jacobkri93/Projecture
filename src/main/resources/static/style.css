@@ -1,6 +1,6 @@
-*, ::after, ::before {
-    box-sizing: border-box;
-}
+/**, ::after, ::before {*/
+/*    box-sizing: border-box;*/
+/*}*/
 
 body {
     background-color: #212121;
@@ -11,7 +11,7 @@ body {
 }
 .bgHomeProjectPage {
 
-    background:url("images/bghome.jpg");
+    background:url("images/26293.jpg");
     no-repeat: center center fixed;
     color: #fff;
     font-family: monospace, serif;
