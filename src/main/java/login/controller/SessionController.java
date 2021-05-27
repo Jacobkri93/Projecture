@@ -4,12 +4,15 @@ import login.data.ProjectMapper;
 import login.data.RoleMapper;
 import login.data.SubtaskMapper;
 import login.data.SubtaskRoleMapper;
-import login.domain.*;
+import login.domain.Project;
+import login.domain.SubTaskRoleViewModel;
+import login.domain.Subtask;
+import login.domain.User;
 import org.springframework.web.context.request.WebRequest;
 
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SessionController {
     private ProjectMapper projectMapper;
@@ -28,7 +31,7 @@ public class SessionController {
     public void setSessionInfo(WebRequest request, User user) {
         // Place user info on session
         ArrayList<Project> list = projectMapper.getProject(user);
-        Collections.sort(list, (o1, o2) -> o1.getProject_name().compareTo(o2.getProject_name()));
+        Collections.sort(list, Comparator.comparing(Project::getProject_name));
         request.setAttribute("project_list", list,WebRequest.SCOPE_SESSION);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("role", user, WebRequest.SCOPE_SESSION);

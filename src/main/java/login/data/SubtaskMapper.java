@@ -3,7 +3,6 @@ package login.data;
 import login.domain.Project;
 import login.domain.SubTaskRoleViewModel;
 import login.domain.Subtask;
-import login.domain.SubtaskRole;
 
 import java.sql.*;
 import java.util.ArrayList;
