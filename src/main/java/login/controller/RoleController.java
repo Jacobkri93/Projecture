@@ -9,6 +9,8 @@ public class RoleController {
 
     private RoleMapper roleMapper;
 
+    //Constructor brugt til at instantiere objekter
+
     public RoleController() {
         this.roleMapper = new RoleMapper();
     }

@@ -17,43 +17,52 @@ public class LoginController {
     private ProjectMapper projectMapper;
     private SessionController sessionController;
 
+
+    //Constructor brugt til at instansiere objekter
     public LoginController() {
         this.userMapper = new UserMapper();
         this.projectMapper = new ProjectMapper();
         this.sessionController = new SessionController();
     }
 
+    //PostMapping bruges til at poste til HTTP - for login, tager "email" og "password" fra WebRequest og via login(linje: 26) metoden fra UserMapper klassen.
+
     @PostMapping("/login")
     public String loginUser(WebRequest request) throws LoginSampleException {
-        //Retrieve values from HTML form via WebRequest
+        //Henter værdier fra HTML form via WebRequest
         String email = request.getParameter("email");
         String pwd = request.getParameter("password");
-
-        // delegate work + data to login controller
+        //login metoden hentes fra UserMapper
         User user = userMapper.login(email, pwd);
-//        ArrayList<Project> list = projectMapper.getProject(user);  // den her bruger vi ikke til noget?
+        //setSessionInfo gemmer informationen der skal bruges til metoden
         sessionController.setSessionInfo(request, user);
+
+        //Returnere HTML "home" fra ressources/templates
         return "home";
     }
 
+
+    //Metode til at registere ny bruger, og gemme i databasen - som efterfølgende kan bruge loginUser metoden ovenover.
     @PostMapping("/register")
     public String createUser(WebRequest request) throws LoginSampleException {
-        //Retrieve values from HTML form via WebRequest
+        //Henter værdier fra HTML form via WebRequest
         String email = request.getParameter("email");
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
 
-        // If passwords match, work + data is delegated to login controller
+        // If sætning til passwords match
         if (password1.equals(password2)) {
             User user = new User(email, password1);
             userMapper.createUser(user);
             sessionController.setSessionInfo(request, user);
             return "home";
 
-        } else { // If passwords don't match, an exception is thrown
+        } else { // else sætning til passwords mismatch, en exception smides med teksten.
             throw new LoginSampleException("The two passwords did not match");
         }
     }
+
+    //exception håndtering - returnere exception html siden med error tekst.
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
         model.addAttribute("message", exception.getMessage());

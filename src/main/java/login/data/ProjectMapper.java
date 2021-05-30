@@ -11,12 +11,19 @@ public class ProjectMapper {
     SubtaskMapper subtaskMapper = new SubtaskMapper();
     RoleMapper roleMapper = new RoleMapper();
 
+    /*Opretter nyt projekt og gemmer i DB
+    * Connection: Kommer fra DBManager klassen, som skaber forbindelsen
+    * String SQL: Et statement for hvilken udførsel den skal køres og gemmes pga. det er et INSERT INTO
+    * Preparedstatement: Pre-compileret statement der bruges til at indsætte værdier, i dette tilfælde navn, duration og bruger ID.
+    * executeUpdate bruges til at eksekvere SQL Statementet (INTERT, DELETE, UPDATE)
+    * ResultSet
+    * */
+
     public void createProject(Project project, User user) {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO project (project_name,week_duration, user_id) VALUES (?,?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-//             ps.setInt(1, project.getProject_id());
             ps.setString(1, project.getProject_name());
             ps.setInt(2, project.getWeek_duration());
             ps.setInt(3, user.getId());
@@ -24,6 +31,7 @@ public class ProjectMapper {
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
 
+            //ids.getInt brugers til at sætte id på projektet via setProjct_id metoden
             int id = ids.getInt(1);
             project.setProject_id(id);
 
@@ -33,6 +41,9 @@ public class ProjectMapper {
         }
     }
 
+
+    //Metoden bruges til at hente alt fra projektet hvor project_id=? (Det man vælger i browseren på home.html - oversigten af projects)
+    //Metoden returnere altså det projekt, og dets indhold til brugeren og viser det
 
     public Project getProjectNew(Integer project_id) {
         Project project = new Project();
@@ -60,6 +71,9 @@ public class ProjectMapper {
         return project;
     }
 
+
+    //Metoden bruges til at hente en liste over alle projekter ud fra en bruges ID.
+    //Metoden returnere en Arrayliste der kaldes projectList
 
     public ArrayList<Project> getProject(User user) {
         ArrayList<Project> projectList = new ArrayList<Project>();

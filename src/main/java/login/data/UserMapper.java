@@ -10,6 +10,7 @@ public class UserMapper {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO user (email, password) VALUES (?, ?)";
+            //Man bruger PreparedStatement for at mindske eksekveringstid og et Preparedstatement indeholder et SQL statement der er precompileret
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getPassword());

@@ -42,14 +42,6 @@ public class FrontController {
     }
 
 
-//    @GetMapping(value = "/project/{id}")
-//    public String projectOverview(WebRequest request, @PathVariable("id") int id) {
-//        ArrayList<Subtask> subtasks = subtaskController.getSubtaskList(id);
-////        sessionController.setSessionInfoForSubtask(subtasks);
-//
-//        return "ProjectPage";
-//    }
-
     @GetMapping(value = "/project/{id}")
     public String projectOverview(@PathVariable("id") int project_id,WebRequest request) {
         sessionController.setSessionInfoFromHome(request,project_id);

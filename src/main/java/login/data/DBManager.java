@@ -14,8 +14,14 @@ public class DBManager {
     private static String url;
     private static Connection connection = null;
 
+
+    /*Denne klasse og metode er primært til at stable forbindelse til databasen
+    * Den opretter en forbindelse via application.properties hvor der peges på en JDBC.driver til MySQL serveren
+    * Der hentes URL + bruger + password til at stable forbindelse
+    * */
     public static Connection getConnection(){
         if (connection != null) return connection;
+        //FileInputStream bruges til at læse infoen fra filen som ligger den path der beskrives i ()
         try (InputStream input = new FileInputStream("src/main/resources/application.properties")) {
             Properties properties = new Properties();
             properties.load(input);

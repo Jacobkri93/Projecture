@@ -20,6 +20,7 @@ public class SessionController {
     private SubtaskMapper subtaskMapper;
     private SubtaskRoleMapper subtaskRoleMapper;
 
+    //Constructor brugt til at instantiere objekter
     public SessionController() {
         this.projectMapper = new ProjectMapper();
         this.roleMapper = new RoleMapper();
@@ -29,44 +30,43 @@ public class SessionController {
     }
 
     public void setSessionInfo(WebRequest request, User user) {
-        // Place user info on session
+        // Placerer user info i en session
         ArrayList<Project> list = projectMapper.getProject(user);
+
+        //Placerer listen af projekter i alfabetisk rækkefølge i browseren
         Collections.sort(list, Comparator.comparing(Project::getProject_name));
+
+        //setAttribute bruges til at store information i session
         request.setAttribute("project_list", list,WebRequest.SCOPE_SESSION);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("role", user, WebRequest.SCOPE_SESSION);
-        //laver med crof
-//        ArrayList<Project> projectsx = projectController.getProject(user);
-//        request.setAttribute("projects", projectController.getProject(user), WebRequest.SCOPE_SESSION);
+        //WebRequest.SCOPE_SESSION bruges til at indikere den lokale session, hvis sådan en er tilgængelig
     }
 
     public void setSessionInfoForProject(WebRequest request, Project project) {
-        // Place project info on session
+        // Placerer project info i en session
         request.setAttribute("name", project.getProject_name(), WebRequest.SCOPE_SESSION);
         request.setAttribute("week_duration", project.getWeek_duration(), WebRequest.SCOPE_SESSION);
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
         request.setAttribute("project_id", project.getProjectId(), WebRequest.SCOPE_SESSION);
 
-
-
-//        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
-//        added roles
-
     }
     public void setSessionInfoForSubtask(WebRequest request, User user, ArrayList<Subtask> list, Project project) {
-        //Place subtask info on session
+        //Placerer subtask info i en session
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
         request.setAttribute("subtasks", list, WebRequest.SCOPE_SESSION);
         request.setAttribute("roles", roleMapper.getRoles(), WebRequest.SCOPE_SESSION);
-
-
-//        request.setAttribute("roles", this.roleController.getRoles(), WebRequest.SCOPE_SESSION);
     }
+
+    //Denne metode bruges til interaktion på home.html siden, at man kan gå ind på brugerens projekter
+    //Man henter projektets indhold og viser det i browseren
     public void setSessionInfoFromHome(WebRequest request, int project_id){
         Project project = projectMapper.getProjectNew(project_id);
         request.setAttribute("name",project.getProject_name(),WebRequest.SCOPE_SESSION);
         request.setAttribute("week_duration", project.getWeek_duration(), WebRequest.SCOPE_SESSION);
+
+        //Her hentes der alle subtask fra projektet - og man looper størrelsen af Arraylisten igennem og henter rollerne der er på hver subtask
         ArrayList<Subtask> subtask = subtaskMapper.getSubtaskList(project_id);
         for (int i = 0; i<subtask.size();i++){
             subtask.get(i).setSubtaskRoleList(subtaskRoleMapper.getRolesFromSubtask(subtask.get(i).getId()));
@@ -80,7 +80,7 @@ public class SessionController {
         double sum = 0;
       for (Subtask x: subtasks) {
          ArrayList<SubTaskRoleViewModel> vm =  x.getSubtaskRoleList();
-
+         //For hver role i Arraylisten ganger man pris med hours og får en sum
         for (SubTaskRoleViewModel y: vm) {
             sum += y.getPrice() * y.getHours();
          }
