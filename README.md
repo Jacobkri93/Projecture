@@ -36,5 +36,15 @@ id/description/price
 - Login med din bruger/register ny bruger
 
 ****Trin 5:**** 
-- f
+- Opret nyt projekt under _"Create a new project"_ -> Giv projektet et navn og antal uger projektet forventes at køre
+  - Tryk på _Create project_
+
+
+****Trin 6:**** 
+- Under projektet: 
+  - Opret subtask til projektet under _"Add subtask"_ -> Giv subtasken et navn, ressourcer pr. udvikler (Senior Developer hours, Developer hours, Designer hours)
+    - Tryk _Create subtask_
+    
+
+Før at prisen kan udregnes 
 
