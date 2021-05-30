@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 public class RoleMapper {
 
+    //Metoden bruges til at hente alt data fra role table i DB.
+    //Metoden gemmer id, description og price i en Arrayliste kaldet roles via roles.add
+    //Returnere roles Arraylisten
     public ArrayList<Role> getRoles() {
-
         ArrayList<Role> roles = new ArrayList<Role>();
-
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT * FROM role";
@@ -22,8 +23,6 @@ public class RoleMapper {
                 double price = rs.getDouble("price");
                 roles.add(new Role(id, description, price));
             }
-
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

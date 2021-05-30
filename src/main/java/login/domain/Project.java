@@ -8,15 +8,7 @@ public class Project {
     private int week_duration;
     private int user_id;
     private ArrayList<Subtask> subtasklist;
-//    private double projectPrice;
 
-//    public double getProjectPrice() {
-//        return projectPrice;
-//    }
-//
-//    public void setProjectPrice(double projectPrice) {
-//        this.projectPrice = projectPrice;
-//    }
 
     public Project(String project_name, int week_duration) {
         this.project_name = project_name;

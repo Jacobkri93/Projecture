@@ -44,4 +44,14 @@ public class SubTaskRoleViewModel {
     public void setFinalPrice(double finalPrice) {
         FinalPrice = finalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "SubTaskRoleViewModel{" +
+                "RoleDescription='" + RoleDescription + '\'' +
+                ", Hours=" + Hours +
+                ", Price=" + Price +
+                ", FinalPrice=" + FinalPrice +
+                '}';
+    }
 }

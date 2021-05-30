@@ -16,7 +16,7 @@ public class ProjectMapper {
     * String SQL: Et statement for hvilken udførsel den skal køres og gemmes pga. det er et INSERT INTO
     * Preparedstatement: Pre-compileret statement der bruges til at indsætte værdier, i dette tilfælde navn, duration og bruger ID.
     * executeUpdate bruges til at eksekvere SQL Statementet (INTERT, DELETE, UPDATE)
-    * ResultSet
+    * ResultSet er dataen fra den specifikke tabel
     * */
 
     public void createProject(Project project, User user) {
@@ -101,24 +101,6 @@ public class ProjectMapper {
 
     }
 
-    public Project addSubtaskToProject(User user, Subtask subtask, Integer project_id) {
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subtasks (task_name, project_id) VALUES (?,?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, subtask.getTask_name());
 
-            ps.setInt(2, project_id);
-            ps.executeUpdate();
 
-        } catch (SQLException ex) {
-        }
-        return getProjectNew(project_id);
-    }
-
-    public ArrayList<Project> getProjectList(User user) {
-        ArrayList<Project> projectList = getProject(user);
-        subtaskMapper.setProjectSubtask(projectList);
-        return projectList;
-    }
 }

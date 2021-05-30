@@ -6,6 +6,7 @@ import java.sql.*;
 
 public class UserMapper {
 
+    //Metoden bruges til at oprette en ny bruger og gemme i DB.
     public void createUser(User user) throws LoginSampleException {
         try {
             Connection con = DBManager.getConnection();
@@ -24,10 +25,11 @@ public class UserMapper {
         }
     }
 
+    //Metoden skal bruges når en bruger vil logge ind -> Den spørger efter user_id fra user tabellen, hvor emailen og password == "Det brugeren skriver"
     public User login(String email, String password) throws LoginSampleException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT user_id FROM user "
+            String SQL = "SELECT user_id   "
                     + "WHERE email=? AND password=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);
@@ -47,9 +49,10 @@ public class UserMapper {
     }
 
 
-    // Ny metode til test case. A foreign key with cascade delete means that if a record in the parent table is deleted,
-    // then the corresponding records in the child table will automatically be deleted.
-    // This is called a cascade delete in SQL Server.
+    // Metode til test case.
+    // En foreign key med cascade delete som betyder at hvis en værdi i parenttablen er slettet,
+    // Så vil de samme værdier i tabellens child også blive slettet.
+    // Dette kaldes en cascade delete i SQL server.
     public void deleteUser(User user) {
         try {
             int id = 0;
