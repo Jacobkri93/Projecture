@@ -46,5 +46,5 @@ id/description/price
     - Tryk _Create subtask_
     
 
-Før at prisen kan udregnes 
+Før at prisen kan udregnes skal du logge ud og ind igen, og finde det projekt du har oprettet og se prisen på subtask nu
 
