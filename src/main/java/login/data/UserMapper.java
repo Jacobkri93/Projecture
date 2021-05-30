@@ -29,7 +29,7 @@ public class UserMapper {
     public User login(String email, String password) throws LoginSampleException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT user_id   "
+            String SQL = "SELECT user_id FROM user   "
                     + "WHERE email=? AND password=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);
