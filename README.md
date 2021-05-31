@@ -15,6 +15,7 @@ Du skal have følgende programmer før programmet kan køre lokalt på din enhed
 
 ****Trin 1:****
 - Kør SQL script filen i MySQL workbench: src/main/resources/sql/script.sql
+- Sørg for at application.properties password og bruger er korrekt (eller skal man rette det til ens eget)
   
 ****Trin 2:****
 - ****VIGTIGT**** Indsæt følgende roller i role tabellen:
