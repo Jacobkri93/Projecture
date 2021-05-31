@@ -15,7 +15,7 @@
 <p class="currentUser" th:text="${session.user.email}" th:unless="${session == null}">[...]</p>
     <hr class="seperationBar">
 <div class="projectformbox">
-    <!-- input boxes-->
+    <!-- input project -->
 <form autocomplete='off' class='createProjectForm' th:action="@{/makeproject}" method="POST">
     <div class='control'>
         <h1>
@@ -63,7 +63,7 @@
 </form>
 </div>
 
-<!-- input boxes-->
+<!-- input project ends -->
 
 
 

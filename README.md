@@ -47,5 +47,8 @@ id/description/price
     - Tryk _Create subtask_
     
 
-Før at prisen kan udregnes skal du logge ud og ind igen, og finde det projekt du har oprettet og se prisen på subtask nu
+DEPLOYED LINK: http://projecture2-env.eba-ubvpjyhf.eu-north-1.elasticbeanstalk.com/
+
+
+(Før at prisen kan udregnes skal du logge ud og ind igen, og finde det projekt du har oprettet og se prisen på subtask nu)
 
