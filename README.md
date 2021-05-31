@@ -47,8 +47,11 @@ id/description/price
     - Tryk _Create subtask_
     
 
-DEPLOYED LINK: http://projecture2-env.eba-ubvpjyhf.eu-north-1.elasticbeanstalk.com/
+DEPLOYED LINK: 
+http://projecture2-env.eba-ubvpjyhf.eu-north-1.elasticbeanstalk.com/
 
+Youtube video med gennemgang af Webapplikationen: 
+https://www.youtube.com/watch?v=5XKak_dr1ls&ab_channel=primarykofin
 
 (Før at prisen kan udregnes skal du logge ud og ind igen, og finde det projekt du har oprettet og se prisen på subtask nu)
 
