@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 
-
+//Ansvarlig: Patrick + Mads
 public class SubtaskMapper {
     SubtaskRoleMapper subtaskRoleMapper = new SubtaskRoleMapper();
 

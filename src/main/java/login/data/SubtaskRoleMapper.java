@@ -5,6 +5,7 @@ import login.domain.SubTaskRoleViewModel;
 import java.sql.*;
 import java.util.ArrayList;
 
+//Ansvarlig: Jacob + Patrick
 public class SubtaskRoleMapper {
 
     //Metoden getRolesFromSubtask henter dataen fra subtask, subtaskrole og role tabellerne og fletter dem sammen ud fra subtask id

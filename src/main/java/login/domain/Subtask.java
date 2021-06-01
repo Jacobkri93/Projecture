@@ -2,6 +2,8 @@ package login.domain;
 
 import java.util.ArrayList;
 
+
+//Ansvarlig: Mads
 public class Subtask {
 
     public int getId() {

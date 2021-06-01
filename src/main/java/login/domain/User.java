@@ -1,5 +1,7 @@
 package login.domain;
 
+
+//Ansvarlig: Patrick
 public class User {
     public User(String email, String password) {
         this.email = email;

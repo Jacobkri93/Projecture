@@ -5,6 +5,7 @@ import login.domain.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+//Ansvarlig: Jacob + Peter
 public class RoleMapper {
 
     //Metoden bruges til at hente alt data fra role table i DB.

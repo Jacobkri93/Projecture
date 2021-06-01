@@ -7,6 +7,7 @@ import login.domain.Subtask;
 
 import java.util.ArrayList;
 
+//Ansvarlig: Jacob + Patrick
 public class SubtaskController {
 
 

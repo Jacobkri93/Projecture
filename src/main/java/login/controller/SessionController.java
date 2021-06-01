@@ -13,7 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
+//Ansvarlig: Mads + Peter
 public class SessionController {
     private ProjectMapper projectMapper;
     private RoleMapper roleMapper;

@@ -1,5 +1,6 @@
 package login.domain;
 
+//Ansvarlig: Jacob
 public class Role {
     private int id;
     private String description;

@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
-
+//Ansvarlig: ALLE
 @Controller
 public class FrontController {
 
-    // use case controller (GRASP Controller) - injects concrete facade instance into controller
+
     private ProjectController projectController = new ProjectController();
     private SubtaskController subtaskController = new SubtaskController();
     private RoleController roleController = new RoleController();
@@ -24,12 +24,14 @@ public class FrontController {
     private SessionController sessionController = new SessionController();
 
 
-    //Getmapping når vi skal have noget fra serveren. Betyder også html siderne.
+    //Getmapping når vi skal have noget fra serveren.
     @GetMapping("/")
     public String getHome() {
         return "index";
     }
 
+    //PostMapping når vi skal give noget til serveren. Fx. at oprette noget
+    //Metoden bruges til at oprette et projekt - denne gemmes under den bruger som er logget ind
     @PostMapping(value = "/makeproject")
     public String createProject(WebRequest request) {
         sessionController.clearSession(request);
@@ -42,6 +44,7 @@ public class FrontController {
     }
 
 
+    //Denne metode er brugt til at hente overview over aktive projekter på home.html siden.
     @GetMapping(value = "/project/{id}")
     public String projectOverview(@PathVariable("id") int project_id,WebRequest request) {
         sessionController.setSessionInfoFromHome(request,project_id);
@@ -69,7 +72,7 @@ public class FrontController {
 
         Subtask subtask = this.subtaskController.getSubtask(task_name, project_id);
 
-        //Checks if the hours has input, otherwise set it to 0
+        //Kontrollere om hours har et input, ellers sættes det til 0 og gemmes.
         if (subtask == null) {
             subtask = subtaskController.createSubtask(task_name, project_id);
             ArrayList<Role> roles = roleController.getRoles();
@@ -99,8 +102,7 @@ public class FrontController {
         ArrayList<Subtask> list = subtaskController.getSubtaskList(project_id);
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
         sessionController.setSessionInfoForSubtask(request, user, list, project);
-// vi prøvede at parse en String til et project fra vores get.attribute. Nu gemmer vi et faktisk project i sessionen. ikke bare navnet/ dvs nu er det et object og ikke en string.
-        // linje 105 satte project første gang men anden gang kørte den en string. så fejlen var i setSessioninfoforsubtask
+
         return "redirect:/project";
     }
 

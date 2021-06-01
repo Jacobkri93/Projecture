@@ -2,6 +2,7 @@ package login.domain;
 
 import java.util.ArrayList;
 
+//Ansvarlig: Jacob
 public class SubtaskRole {
     private int id;
     private double hours;

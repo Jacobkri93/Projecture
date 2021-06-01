@@ -7,6 +7,7 @@ import login.domain.User;
 import java.sql.*;
 import java.util.ArrayList;
 
+//Ansvarlig: Peter + Patrick
 public class ProjectMapper {
     SubtaskMapper subtaskMapper = new SubtaskMapper();
     RoleMapper roleMapper = new RoleMapper();

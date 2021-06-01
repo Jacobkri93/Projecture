@@ -2,6 +2,7 @@ package login.domain;
 
 import java.util.ArrayList;
 
+//Ansvarlig: Peter
 public class Project {
     private int project_id;
     private String project_name;

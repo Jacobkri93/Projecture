@@ -1,7 +1,7 @@
 package login.controller;
 
 import login.data.SubtaskRoleMapper;
-
+//Ansvarlig: Jacob
 public class SubtaskRoleController {
 
     private SubtaskRoleMapper subtaskRoleMapper;

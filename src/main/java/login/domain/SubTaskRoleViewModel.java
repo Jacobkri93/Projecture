@@ -1,5 +1,7 @@
 package login.domain;
 
+
+//Ansvarlig: Patrick
 public class SubTaskRoleViewModel {
     private String RoleDescription;
     private int Hours;

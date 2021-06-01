@@ -4,6 +4,7 @@ import login.domain.LoginSampleException;
 import login.domain.User;
 import java.sql.*;
 
+//Ansvarlig: Mads + Patrick
 public class UserMapper {
 
     //Metoden bruges til at oprette en ny bruger og gemme i DB.
